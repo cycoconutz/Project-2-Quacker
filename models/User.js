@@ -1,6 +1,6 @@
 const { Model, DataTypes, STRING } = require('sequelize');
 const bcrypt = require('bcrypt');
-const sequelize = require('../config/config');
+const sequelize = require('../config/connection');
 
 // create our User model
 class User extends Model {
@@ -46,6 +46,7 @@ User.init(
       },
     },
     profile_image: {
+      type: DataTypes.INTEGER,
       references: {
         model: "profileimage",
         key: "id",

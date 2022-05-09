@@ -1,7 +1,7 @@
 module.exports = {
-  content: [],
+  content: ['./**/*.handlebars'],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};

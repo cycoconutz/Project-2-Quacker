@@ -16,6 +16,14 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    first_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    last_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,19 +40,36 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [6],
+        len: [8, 30],
       },
     },
+    // profile_image: {
+    //   references: {
+    //     model: "profileimage",
+    //     key: "id",
+    //   },
+    // },
+    // post: {
+    //   references: {
+    //     model: "post",
+    //     key: "id",
+    //   },
+    // },
+    
   },
   {
     hooks: {
-      async beforeCreate(newUserData) {
+      beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      },
     },
     sequelize,
-    timestamps: false,
+    timestamps: true,
     freezeTableName: true,
     underscored: true,
     modelName: 'user',

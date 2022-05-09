@@ -5,6 +5,10 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   line-height: 1.15;
   /* 1 */

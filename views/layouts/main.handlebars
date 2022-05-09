@@ -14,15 +14,19 @@
 
 <body>
   <header>
-    <h1>Welcome to the Four Seasons Museum</h1>
+    <h1>
+      <span id="Q">Q</span>uacker
+    </h1>
   </header>
   <nav>
-    <a href="/">Home</a>
+    <a href="/">Pond</a>
     {{#if loggedIn}}
     <button id="logout" class="btn-no-style">Logout</button>
     {{else}}
     <a href="/login">Login</a>
     {{/if}}
+    <a href="/">Quacks</a>
+
   </nav>
   <main>
     {{{body}}}

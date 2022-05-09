@@ -46,6 +46,7 @@ User.init(
       },
     },
     profile_image: {
+      type: DataTypes.INTEGER,
       references: {
         model: "profileimage",
         key: "id",

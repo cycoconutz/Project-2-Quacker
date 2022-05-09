@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET one post
-// Use the custom middleware before allowing the user to access the gallery withAuth,
+// Use the custom middleware before allowing the user to access the post withAuth,
 router.get('/post/:id', async (req, res) => {
   try {
     const dbPostData = await Post.findByPk(req.params.id, {
@@ -47,36 +47,36 @@ router.get('/post/:id', async (req, res) => {
       ],
     });
 
-    const gallery = dbGalleryData.get({ plain: true });
-    res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
+    const post = dbPostData.get({ plain: true });
+    res.render('post', { post, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-// GET one painting
-// Use the custom middleware before allowing the user to access the painting withAuth,
-router.get('/painting/:id', async (req, res) => {
-  try {
-    const dbPaintingData = await Painting.findByPk(req.params.id);
+// // GET one painting
+// // Use the custom middleware before allowing the user to access the painting withAuth,
+// router.get('/painting/:id', async (req, res) => {
+//   try {
+//     const dbPaintingData = await Painting.findByPk(req.params.id);
 
-    const painting = dbPaintingData.get({ plain: true });
+//     const painting = dbPaintingData.get({ plain: true });
 
-    res.render('painting', { painting, loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+//     res.render('painting', { painting, loggedIn: req.session.loggedIn });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
-router.get('/login', (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
+// router.get('/login', (req, res) => {
+//   if (req.session.loggedIn) {
+//     res.redirect('/');
+//     return;
+//   }
 
-  res.render('login');
-});
+//   res.render('login');
+// });
 
 module.exports = router;

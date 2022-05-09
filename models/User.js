@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, STRING } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/config');
 
@@ -37,18 +37,20 @@ User.init(
         len: [8, 30],
       },
     },
-    // profile_image: {
-    //   references: {
-    //     model: "profileimage",
-    //     key: "id",
-    //   },
-    // },
-    // post: {
-    //   references: {
-    //     model: "post",
-    //     key: "id",
-    //   },
-    // },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
+    },
+    profile_image: {
+      references: {
+        model: "profileimage",
+        key: "id",
+      },
+    },
   },
   {
     hooks: {
@@ -62,10 +64,10 @@ User.init(
       },
     },
     sequelize,
-    timestamps: true,
+    timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'User'
+    modelName: 'user'
   }
 );
 

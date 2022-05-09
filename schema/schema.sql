@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS quacker_db;
+
+CREATE DATABASE quacker_db;

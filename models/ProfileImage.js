@@ -24,7 +24,7 @@ ProfileImage.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'profileimage',
+    modelName: 'profileImage',
   }
 );
 

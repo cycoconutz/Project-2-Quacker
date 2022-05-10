@@ -168,4 +168,22 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
+// render one post from homepage
+router.get("/post", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+  res.render("post");
+});
+
+// render one user profile from homepage
+router.get("/user", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+  res.render("user");
+});
+
 module.exports = router;

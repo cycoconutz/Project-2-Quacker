@@ -1,28 +1,86 @@
 const router = require('express').Router();
 const { Post } = require('../../models');
 
+// get ALL posts
+router.get('/', async (req, res) => {
+  try {
+  const dbPostData = await Post.findAll({
+    // exclude creation and updated date, can remove and will work fine
+      attributes: { exclude: ['createdAt', 'updatedAt']}
+  })
+
+  res.status(200).json(dbPostData);
+
+} catch (err) {
+  console.log(err);
+  if (err) throw err;
+}
+});
+
+// get single post
+router.get('/:id', async (req, res) => {
+  try {
+  const dbPostData = await Post.findOne({
+      attributes: { exclude: ['createdAt', 'updatedAt']},
+      where: { id: req.params.id },
+
+  })
+
+  res.status(200).json(dbPostData);
+
+} catch (err) {
+  console.log(err);
+  if (err) throw err;
+}
+});
+
 // CREATE new post
 router.post('/', async (req, res) => {
   try {
-    const dbUserData = await User.create({
-      username: req.body.username,
-      first_name: req.body.first_name,
-      last_name: req.body.last_name,
-      email: req.body.email,
-      password: req.body.password,
+    const dbPostData = await Post.create({
+      message: req.body.message,
+      likes: req.body.likes
     });
 
-    req.session.save(() => {
-      req.session.loggedIn = true;
+      res.status(200).json(dbPostData);
 
-      res.status(200).json(dbUserData);
-    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
+// delete post
+router.delete("/:id", async (req, res) => {
+  try {
+  const deletePost = await Post.destroy({
+      where: { id: req.params.id },
+  })
+  res.json(deletePost);
+
+} catch (err) {
+  console.log(err);
+  if (err) throw err;
+}
+});
+
+// Update Post
+router.put("/:id", async (req, res) => {
+  try {
+  const updatePost = await Post.update({
+      where: { id: req.params.id,
+      },
+  })
+  res.json(updatePost);
+
+} catch (err) {
+  console.log(err);
+  if (err) throw err;
+}
+});
+
+
+// Do we need these? 
 // Login
 router.post('/login', async (req, res) => {
   try {

@@ -2,6 +2,10 @@ const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
 const ProfileImage = require('./ProfileImage');
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 // HAS MANY LEFT || BELONGS TO RIGHT
 
 User.hasMany(Post, {
@@ -50,4 +54,8 @@ module.exports = {
   Comment,
   Post,
   ProfileImage,
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> main

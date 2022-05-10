@@ -34,7 +34,6 @@ router.get('/:id', async (req, res) => {
 
 // CREATE new post
 router.post('/', withAuth, async (req, res) => {
-  console.log('entered the post req');
   try {
     const newPost = await Post.create({
       attributes: ['username'],

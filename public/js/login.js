@@ -1,25 +1,26 @@
+// HOMEPAGE LOGIN INFO
+// Variables
+const submitBtn = document.getElementById('submitBtn');
+const email = document.querySelector('#user-email').value.trim();
+const password = document.querySelector('#user-password').value.trim();
+
+// function declaration
 const loginFormHandler = async (event) => {
+  console.log('entered form handler');
   event.preventDefault();
 
-  const username = document.querySelector('#user-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+  const response = await fetch('/api/users/login', {
+    method: 'POST',
+    body: JSON.stringify(email, password),
+    headers: { 'Content-Type': 'application/json' }, // tells the fetch its going to be JSON
+  });
 
-  if (username && password) {
-    const response = await fetch('/api/users/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-    if (response.ok) {
-      document.location.replace('/');
-    } else {
-      alert('Failed to log in.');
-    }
+  if (response.ok) {
+    document.location.replace('/pond');
+  } else {
+    alert(response.statusText);
   }
 };
-
-
 
 document
   .querySelector('.login-form')

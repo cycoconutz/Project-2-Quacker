@@ -171,12 +171,12 @@ router.get("/user", (req, res) => {
   res.render("user");
 });
 
-router.get("/pondfeed", (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
-  res.render("pondfeed");
+router.get("/pond", (req, res) => {
+  // if (!req.session.loggedIn) {
+  //   res.redirect("/");
+  //   return;
+  // }
+  res.render("pond");
 });
 
 module.exports = router;

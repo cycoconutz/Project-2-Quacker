@@ -148,11 +148,7 @@ router.get("/user/:id", async (req, res) => {
       res.status(404).json({ message: "User doesn't exist." });
     };
 
-<<<<<<< HEAD
       // console.log("User Data", dbUserData);
-=======
-    console.log("User Data", dbUserData);
->>>>>>> main
 
     const post = dbUserData.get({ plain: true });
     res.render("user", { post, loggedIn: req.session.loggedIn });
@@ -230,17 +226,10 @@ router.get("/user", (req, res) => {
 });
 
 router.get("/pond", (req, res) => {
-<<<<<<< HEAD
-  // if (!req.session.loggedIn) {
-  //   res.redirect("/");
-  //   return;
-  // }
-=======
   if (!req.session.loggedIn) {
     res.redirect("/");
     return;
   }
->>>>>>> main
   res.render("pond");
 });
 

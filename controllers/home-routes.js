@@ -9,19 +9,17 @@ router.get('/', async (req, res) => {
     const dbPostData = await Post.findAll({
       include: [
         {
-          model: Post,
-          attributes: ["message", "likes", "user_id"],
+          model: User,
+          attributes: ['username'],
         },
       ],
     });
 
-    const posts = dbPostData.map((post) =>
-      post.get({ plain: true })
-    );
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
 
     res.render('homepage', {
       posts,
-      loggedIn: req.session.loggedIn,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     console.log(err);
@@ -36,13 +34,8 @@ router.get('/post/:id', async (req, res) => {
     const dbPostData = await Post.findByPk(req.params.id, {
       include: [
         {
-          model: Post,
-          attributes: [
-            'id',
-            'message',
-            'likes',
-            'user_id',
-          ],
+          model: User,
+          attributes: ['username'],
         },
       ],
     });

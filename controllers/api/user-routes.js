@@ -12,11 +12,14 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
 
+    // save and create the properties
     req.session.save(() => {
+      // if loggedIn isn't a current property of req.session it will create one with the variable true
       req.session.loggedIn = true;
 
       res.status(200).json(dbUserData);
     });
+    console.log(req.session);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -25,6 +28,7 @@ router.post('/', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
+  console.log('works?');
   try {
     const dbUserData = await User.findOne({
       where: {

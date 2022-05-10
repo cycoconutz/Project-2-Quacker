@@ -164,7 +164,7 @@ router.get("/login", (req, res) => {
     return;
   }
 
-  res.render("pondfeed");
+  res.render("pond");
 });
 // Supposed to Compare Login input to DB values
 router.post('/login', async (req, res) => {
@@ -225,12 +225,12 @@ router.get("/user", (req, res) => {
   res.render("user");
 });
 
-router.get("/pondfeed", (req, res) => {
+router.get("/pond", (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect("/");
     return;
   }
-  res.render("pondfeed");
+  res.render("pond");
 });
 
 module.exports = router;

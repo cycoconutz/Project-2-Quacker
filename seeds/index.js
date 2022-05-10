@@ -1,3 +1,4 @@
+
 const sequelize = require('../config/connection');
 const seedUser = require('./userData');
 const seedPost = require('./postData');

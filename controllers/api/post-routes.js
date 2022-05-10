@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../../models');
+const { Post, User, Comment, ProfileImage } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get ALL posts

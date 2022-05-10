@@ -48,17 +48,6 @@ router.get("/", async (req, res) => {
     }
   });
 
-
-router.get("/login", (req, res) => {
-  // if already logged in, render homepage
-  if (req.session.logged_in) {
-    res.redirect("/");
-    return;
-  }
-  // if not logged in redirect to login page
-  res.render("/login");
-})
-
 // GET one post *****
 // Use the custom middleware before allowing the user to access the post withAuth
 // Error: Failed to lookup view "post" in views directory 
@@ -162,13 +151,39 @@ router.get("/user/:id", async (req, res) => {
 //   }
 // });
 
-// router.get('/login', (req, res) => {
-//   if (req.session.loggedIn) {
-//     res.redirect('/');
-//     return;
-//   }
+router.get("/login", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
 
-//   res.render('login');
-// });
+  res.render("login");
+});
+
+router.get("/signup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("signup");
+});
+
+// render one post from homepage
+router.get("/post", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+  res.render("post");
+});
+
+// render one user profile from homepage
+router.get("/user", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+  res.render("user");
+});
 
 module.exports = router;

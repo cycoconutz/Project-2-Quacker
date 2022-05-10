@@ -1,50 +1,48 @@
-const router = require("express").Router();
-const { User } = require("../../models");
-const withAuth = require("../../utils/auth");
+const router = require('express').Router();
+const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-// Where to use withAuth helper? 
+// Where to use withAuth helper?
 
 // get ALL users
 router.get('/', async (req, res) => {
   try {
-  const dbUserData = await User.findAll({
-      attributes: { exclude: ['[password']}
-  })
+    const dbUserData = await User.findAll({
+      attributes: { exclude: ['[password'] },
+    });
 
-  res.status(200).json(dbUserData);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    res.status(200).json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
 // get single users
 router.get('/:id', async (req, res) => {
   try {
-  const dbUserData = await User.findOne({
-      attributes: { exclude: "password"},
+    const dbUserData = await User.findOne({
+      attributes: { exclude: 'password' },
       where: { id: req.params.id },
-  })
+    });
 
-  res.status(200).json(dbUserData);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    res.status(200).json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
 // CREATE new user
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       username: req.body.username,
       password: req.body.password,
-      email: req.body.email
-    })
+      email: req.body.email,
+    });
 
     // save and create the properties
     req.session.save(() => {
@@ -61,50 +59,46 @@ router.post("/", async (req, res) => {
 });
 
 // delete user
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
-  const deleteNote = await User.destroy({
-      where: { id: req.params.id,
-      },
-  })
-  res.json(deleteNote);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    const deleteNote = await User.destroy({
+      where: { id: req.params.id },
+    });
+    res.json(deleteNote);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
 // Update User
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-  const updateUser = await User.update(req.body, {
+    const updateUser = await User.update(req.body, {
       individualHooks: true,
-      where: { id: req.params.id,
-      },
-  })
-  res.json(updateUser);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+      where: { id: req.params.id },
+    });
+    res.json(updateUser);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
-// Do we need these? 
+// Do we need these?
 // Login
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
         email: req.body.email,
       },
-    })
+    });
 
     if (!dbUserData) {
       res
         .status(400)
-        .json({ message: "Incorrect email or password. Please try again!" });
+        .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
@@ -113,7 +107,7 @@ router.post("/login", async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: "Incorrect email or password. Please try again!" });
+        .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
@@ -122,7 +116,7 @@ router.post("/login", async (req, res) => {
 
       res
         .status(200)
-        .json({ user: dbUserData, message: "You are now logged in!" });
+        .json({ user: dbUserData, message: 'You are now logged in!' });
     });
   } catch (err) {
     console.log(err);
@@ -131,7 +125,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Logout
-router.post("/logout", (req, res) => {
+router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();

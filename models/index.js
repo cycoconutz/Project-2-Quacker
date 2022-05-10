@@ -2,7 +2,6 @@ const User = require('./User');
 const Post = require('./Post');
 const Comment = require('./Comment');
 const ProfileImage = require('./ProfileImage');
-
 // HAS MANY LEFT || BELONGS TO RIGHT
 
 User.hasMany(Post, {
@@ -32,7 +31,7 @@ ProfileImage.hasMany(User, {
 
 // Profile Images
 User.belongsTo(ProfileImage, {
-  foreignKey: '"profileImage_id',
+  foreignKey: "profileImage_id",
 });
 
 Comment.belongsTo(Post, {
@@ -46,7 +45,6 @@ Post.hasMany(Comment, {
 
 // // user belongs to profileimage
 // User.belongsTo(ProfileImage);
-
 module.exports = {
   User,
   Comment,

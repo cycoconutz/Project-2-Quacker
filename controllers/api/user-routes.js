@@ -130,7 +130,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Logout
+// Logout  // send back to homepage ***
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {

@@ -45,27 +45,13 @@ User.init(
         isEmail: true,
       },
     },
-    // profile_image_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: 'profileImage',
-    //     key: 'id',
-    //   },
-    // },
-    // post_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: "post",
-    //     key: "id",
-    //   },
-    // },
-    // comment_id: {
-    //   type: DataTypes.INTEGER,
-    //   references: {
-    //     model: "comment",
-    //     key: "id",
-    //   },
-    // },
+    profile_image_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'profileImage',
+        key: 'id',
+      },
+    },
   },
   {
     hooks: {

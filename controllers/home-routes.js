@@ -8,12 +8,11 @@ router.get("/", async (req, res) => {
   console.log("req.session", req.session);
   try {
     const dbPostData = await Post.findAll({
-      attributes: [
-        "id",
-        "message",
-        "likes",
-        "user_id",
-        "createdAt",
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
       ],
       order: [[ "createdAt", "DESC" ]],
           include: [
@@ -109,12 +108,12 @@ router.get("/post/:id", async (req, res) => {
 // get User
 router.get("/user/:id", async (req, res) => {
   try {
-    const dbUserData = await User.findOne(req.params.id, {
-      attributes: [
-        "id",
-        "first_name",
-        "last_name",
-        "username",
+    const dbPostData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
       ],
         include: [
           {

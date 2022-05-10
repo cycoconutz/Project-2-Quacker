@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // get ALL posts
 router.get('/', async (req, res) => {
@@ -35,15 +36,14 @@ router.get('/:id', async (req, res) => {
 });
 
 // CREATE new post
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
+  console.log('entered the post req');
   try {
-    const dbPostData = await Post.create({
-      message: req.body.message,
-      likes: req.body.likes
+    const newPost = await Post.create({
+      ...req.body,
+      user_id: req.session.user_id,
     });
-
-      res.status(200).json(dbPostData);
-
+    res.status(200).json(newPost);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

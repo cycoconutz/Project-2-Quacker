@@ -46,11 +46,14 @@ router.post("/", async (req, res) => {
       email: req.body.email
     })
 
+    // save and create the properties
     req.session.save(() => {
+      // if loggedIn isn't a current property of req.session it will create one with the variable true
       req.session.loggedIn = true;
 
       res.status(200).json(dbUserData);
     });
+    console.log(req.session);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

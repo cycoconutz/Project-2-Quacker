@@ -1,84 +1,189 @@
-const router = require('express').Router();
-const { Gallery, Painting } = require('../models');
+const router = require("express").Router();
+const { User, Post, Comment, ProfileImage } = require("../models");
 // Import the custom middleware
-const withAuth = require('../utils/auth');
+const withAuth = require("../utils/auth");
 
-// GET all galleries for homepage
-router.get('/', async (req, res) => {
+// GET all Posts for homepage
+router.get("/", async (req, res) => {
+  console.log("req.session", req.session);
   try {
-    const dbGalleryData = await Gallery.findAll({
+    const dbPostData = await Post.findAll({
       include: [
         {
-          model: Painting,
-          attributes: ['filename', 'description'],
+          model: User,
+          attributes: ['username'],
         },
       ],
-    });
-
-    const galleries = dbGalleryData.map((gallery) =>
-      gallery.get({ plain: true })
-    );
-
-    res.render('homepage', {
-      galleries,
-      loggedIn: req.session.loggedIn,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// GET one gallery
-// Use the custom middleware before allowing the user to access the gallery withAuth,
-router.get('/gallery/:id', async (req, res) => {
-  try {
-    const dbGalleryData = await Gallery.findByPk(req.params.id, {
-      include: [
-        {
-          model: Painting,
-          attributes: [
-            'id',
-            'title',
-            'artist',
-            'exhibition_date',
-            'filename',
-            'description',
+      order: [[ "createdAt", "DESC" ]],
+          include: [
+            {
+              model: Comment,
+              attributes: [ "id", "message", "likes", "post_id", "user_id"],
+              order: [[ "createdAt", "DESC" ]],
+              include: {
+                model: User,
+                attributes: ["username", "id"],
+              },
+            },
+            // {
+            //   model: User,
+            //   attributes: [ "username", "id" ],
+            // },
           ],
-        },
-      ],
+        })
+    
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+    console.log(dbPostData);
+    console.log(posts);
+
+    res.render("homepage", {
+      posts,
+      logged_in: req.session.logged_in,
     });
 
-    const gallery = dbGalleryData.get({ plain: true });
-    res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  });
 
-// GET one painting
-// Use the custom middleware before allowing the user to access the painting withAuth,
-router.get('/painting/:id', async (req, res) => {
+// GET one post *****
+// Use the custom middleware before allowing the user to access the post withAuth
+// Error: Failed to lookup view "post" in views directory 
+// "C:\Users\hunte\Desktop\Coding-Bootcamp\Group-Projects\Project-2-Quacker\views"
+// needs handlebar view
+router.get("/post/:id", async (req, res) => {
   try {
-    const dbPaintingData = await Painting.findByPk(req.params.id);
+    const dbPostData = await Post.findOne(req.params.id, {
+      attributes: [
+        "id",
+        "message",
+        "likes",
+        "createdAt",
+      ],
+        include: [
+          {
+            model: Comment,
+            attributes: [ "id", "message", "likes", "post_id", "user_id", "createdAt"],
+            order: [[ "createdAt", "DESC" ]],
+            include: {
+              model: User,
+              attributes: [ "username", "id" ],
+            },
+            // {
+            //   model: User,
+            //   attributes: [ "username", "id" ],
+            // },
+          },
+        ],
+      })
 
-    const painting = dbPaintingData.get({ plain: true });
+      console.log("Post Data", dbPostData);
 
-    res.render('painting', { painting, loggedIn: req.session.loggedIn });
+      // if post doesnt exist...
+      if (!dbPostData) {
+        res.status(404).json({ message: "Post does not exist."});
+      }
+
+    const post = dbPostData.get({ plain: true });
+    res.render("post", { post, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get('/login', (req, res) => {
+// get User
+router.get("/user/:id", async (req, res) => {
+  try {
+    const dbPostData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+        include: [
+          {
+            model: Post,
+            attributes: [ "id", "message", "likes", "user_id"],
+            order: [[ "createdAt", "DESC" ]],
+            include: {
+              model: Comment,
+              attributes: ["id", "message", "likes"],
+            },
+          },
+          {
+            model: User,
+            attributes: [ "username", "id" ],
+          },
+        ],
+      })
+
+      // if no user exists
+      if (!dbUserData) {
+        res.status(404).json({ message: "User doesn't exist."});
+      };
+
+      console.log("User Data", dbUserData);
+
+    const post = dbUserData.get({ plain: true });
+    res.render("user", { post, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// // GET one painting
+// // Use the custom middleware before allowing the user to access the painting withAuth,
+// router.get('/painting/:id', async (req, res) => {
+//   try {
+//     const dbPaintingData = await Painting.findByPk(req.params.id);
+
+//     const painting = dbPaintingData.get({ plain: true });
+
+//     res.render('painting', { painting, loggedIn: req.session.loggedIn });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
+
+router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
+});
+
+router.get("/signup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("signup");
+});
+
+// render one post from homepage
+router.get("/post", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+  res.render("post");
+});
+
+// render one user profile from homepage
+router.get("/user", (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect("/login");
+    return;
+  }
+  res.render("user");
 });
 
 module.exports = router;

@@ -156,7 +156,7 @@ router.get("/signup", (req, res) => {
 // render one post from homepage
 router.get("/post", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect("/login");
+    res.redirect("/");
     return;
   }
   res.render("post");
@@ -165,7 +165,7 @@ router.get("/post", (req, res) => {
 // render one user profile from homepage
 router.get("/user", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect("/login");
+    res.redirect("/");
     return;
   }
   res.render("user");
@@ -173,7 +173,7 @@ router.get("/user", (req, res) => {
 
 router.get("/pondfeed", (req, res) => {
   if (!req.session.loggedIn) {
-    res.redirect("/login");
+    res.redirect("/");
     return;
   }
   res.render("pondfeed");

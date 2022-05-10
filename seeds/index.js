@@ -1,8 +1,9 @@
-const sequelize = require("../config/connection");
-const seedUser = require("./userData");
-const seedPost = require("./postData");
-const seedComment = require("./commentData");
-const seedProfileImages = require("./profileImage");
+
+const sequelize = require('../config/connection');
+const seedUser = require('./userData');
+const seedPost = require('./postData');
+const seedComment = require('./commentData');
+const seedProfileImage = require('./profileImage');
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
@@ -13,7 +14,7 @@ const seedAll = async () => {
 
   await seedComment();
 
-  await seedProfileImages();
+  await seedProfileImage();
 
   process.exit(0);
 };

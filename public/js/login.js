@@ -6,7 +6,7 @@ const loginFormHandler = async function (event) {
   console.log(usernameEl)
   console.log(passwordEl)
 
-  const response = await fetch('/api/user', {
+  const response = await fetch('/api/user/login', {
     method: 'POST',
     body: JSON.stringify({
       username: usernameEl,
@@ -16,7 +16,7 @@ const loginFormHandler = async function (event) {
   });
 
   if (response.ok) {
-    document.location.replace('/dashboard');
+    document.location.replace('/pond');
   } else {
     alert('Failed to login');
   }

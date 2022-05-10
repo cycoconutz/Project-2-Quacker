@@ -87,12 +87,12 @@ router.put('/:id', async (req, res) => {
 });
 
 // Do we need these?
-// Login
+// Login -- This is the one that works
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
-        email: req.body.email,
+        username: req.body.username,
       },
     });
 

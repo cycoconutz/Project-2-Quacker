@@ -50,9 +50,6 @@ router.get("/", async (req, res) => {
 
 // GET one post *****
 // Use the custom middleware before allowing the user to access the post withAuth
-// Error: Failed to lookup view "post" in views directory 
-// "C:\Users\hunte\Desktop\Coding-Bootcamp\Group-Projects\Project-2-Quacker\views"
-// needs handlebar view
 router.get("/post/:id", async (req, res) => {
   try {
     const dbPostData = await Post.findOne(req.params.id, {
@@ -135,21 +132,6 @@ router.get("/user/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// // GET one painting
-// // Use the custom middleware before allowing the user to access the painting withAuth,
-// router.get('/painting/:id', async (req, res) => {
-//   try {
-//     const dbPaintingData = await Painting.findByPk(req.params.id);
-
-//     const painting = dbPaintingData.get({ plain: true });
-
-//     res.render('painting', { painting, loggedIn: req.session.loggedIn });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {

@@ -5,8 +5,6 @@ const app = express();
 
 const apiRoutes = require("./api");
 const homeRoutes = require("./home-routes.js");
-const userRoutes = require("./api/user-routes");
-
 
 
 router.use("/", homeRoutes);

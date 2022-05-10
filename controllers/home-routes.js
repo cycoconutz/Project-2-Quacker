@@ -67,18 +67,17 @@ router.get("/login", (req, res) => {
 // needs handlebar view
 router.get("/post/:id", async (req, res) => {
   try {
-    const dbPostData = await Post.findByPk(req.params.id, {
+    const dbPostData = await Post.findOne(req.params.id, {
       attributes: [
         "id",
         "message",
         "likes",
-        "user_id",
         "createdAt",
       ],
         include: [
           {
             model: Comment,
-            attributes: [ "id", "message", "likes", "post_id", "user_id"],
+            attributes: [ "id", "message", "likes", "post_id", "user_id", "createdAt"],
             order: [[ "createdAt", "DESC" ]],
             include: {
               model: User,
@@ -94,6 +93,11 @@ router.get("/post/:id", async (req, res) => {
 
       console.log("Post Data", dbPostData);
 
+      // if post doesnt exist...
+      if (!dbPostData) {
+        res.status(404).json({ message: "Post does not exist."});
+      }
+
     const post = dbPostData.get({ plain: true });
     res.render("post", { post, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -105,7 +109,7 @@ router.get("/post/:id", async (req, res) => {
 // get User
 router.get("/user/:id", async (req, res) => {
   try {
-    const dbPostData = await User.findByPk(req.params.id, {
+    const dbUserData = await User.findOne(req.params.id, {
       attributes: [
         "id",
         "first_name",
@@ -129,10 +133,15 @@ router.get("/user/:id", async (req, res) => {
         ],
       })
 
-      console.log("User Data", dbPostData);
+      // if no user exists
+      if (!dbUserData) {
+        res.status(404).json({ message: "User doesn't exist."});
+      };
 
-    const post = dbPostData.get({ plain: true });
-    res.render("post", { post, loggedIn: req.session.loggedIn });
+      console.log("User Data", dbUserData);
+
+    const post = dbUserData.get({ plain: true });
+    res.render("user", { post, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

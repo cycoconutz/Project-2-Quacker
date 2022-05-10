@@ -18,10 +18,9 @@
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
+    "materialize-css": "^1.0.0-rc.2",
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"
   },
-  "devDependencies": {
-    "tailwindcss": "^3.0.24"
-  }
+  "devDependencies": {}
 }

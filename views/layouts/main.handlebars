@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/css/output.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
 
@@ -18,22 +18,13 @@
       <span id="Q">Q</span>uacker
     </h1>
   </header>
-  <nav>
-    <a href="/">Pond</a>
-    {{#if loggedIn}}
-    <button id="logout" class="btn-no-style">Logout</button>
-    {{else}}
-    <a href="/login">Login</a>
-    {{/if}}
-    <a href="/">Quacks</a>
-
-  </nav>
   <main>
     {{{body}}}
   </main>
   {{#if loggedIn}}
   <script src="/js/logout.js"></script>
   {{/if}}
+
 </body>
 
 </html>

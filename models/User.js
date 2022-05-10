@@ -45,7 +45,7 @@ User.init(
         isEmail: true,
       },
     },
-    profileimage_id: {
+    profileImage_id: {
       type: DataTypes.INTEGER,
       references: {
         model: 'profileImage',

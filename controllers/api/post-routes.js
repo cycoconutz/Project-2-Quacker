@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, User, Comment, ProfileImage } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get ALL posts
@@ -41,7 +41,7 @@ router.post('/', withAuth, async (req, res) => {
   try {
     const newPost = await Post.create({
       ...req.body,
-      user_id: req.session.user_id,
+      // user_id: req.session.user_id,
     });
     res.status(200).json(newPost);
   } catch (err) {

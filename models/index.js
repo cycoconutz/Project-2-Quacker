@@ -31,7 +31,7 @@ ProfileImage.hasMany(User, {
 
 // Profile Images
 User.belongsTo(ProfileImage, {
-  foreignKey: '"profileImage_id',
+  foreignKey: "profileImage_id",
 });
 
 Comment.belongsTo(Post, {

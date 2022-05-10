@@ -7,7 +7,6 @@ const userData = [
     username: 'JSmith',
     password: 'password123',
     email: 'johnsmith@fakeemail.com',
-    profile_image: 1,
   },
   {
     first_name: 'Wyatt',
@@ -15,7 +14,6 @@ const userData = [
     username: 'Wyattford',
     password: 'password123',
     email: 'wyattcrawford@fakeemail.com',
-    profile_image: 2,
   },
   {
     first_name: 'Mia',
@@ -23,7 +21,6 @@ const userData = [
     username: 'MJarvis',
     password: 'password123',
     email: 'miajarvis@fakeemail.com',
-    profile_image: 3,
   },
 ];
 

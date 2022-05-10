@@ -9,10 +9,6 @@
   --border-radius: 0.3rem;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
   font-family: Arial;
   margin: 0;

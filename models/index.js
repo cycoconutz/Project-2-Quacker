@@ -5,48 +5,57 @@ const ProfileImage = require("./ProfileImage");
 
 // HAS MANY LEFT || BELONGS TO RIGHT
 
+User.hasMany(Post, {
+  foreignKey: 'user_id',
+  // onDelete: 'CASCADE'
+});
+
 // Post Belongs to user
 Post.belongsTo(User, {
   foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
-// user has many posts
-User.hasMany(Post, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
+  // onDelete: 'CASCADE'
 });
 
-Post.hasMany(Comment, {
-  foreignKey: 'post_id',
-  onDelete: 'CASCADE'
-});
-Comment.belongsTo(Post, {
-  foreignKey: 'post_id',
-  onDelete: 'CASCADE' 
-});
-
-// Comments
-Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
 User.hasMany(Comment, {
   foreignKey: "user_id",
-  onDelete: "CASCADE"
+  // onDelete: "CASCADE"
+});
+
+Comment.belongsTo(User, {
+  foreignKey: 'user_id',
+  // onDelete: 'CASCADE'
+});
+
+User.hasOne(ProfileImage, {
+  foreignKey: "profileimage_id",
 });
 
 // Profile Images
-ProfileImage.hasMany(User, {
-  foreignKey: 'profileimage_id',
+ProfileImage.belongsTo(User, {
+  foreignKey: "user_id",
 });
-// user belongs to profileimage
-User.belongsTo(ProfileImage);
 
+Comment.belongsTo(Post, {
+  foreignKey: "post_id",
+});
+
+Post.hasMany(Comment, {
+  foreignKey: "post_id",
+  // onDelete: "CASCADE"
+});
+
+
+
+// // user belongs to profileimage
+// User.belongsTo(ProfileImage);
 
 module.exports = {
   User,
   Comment,
   Post,
   ProfileImage
-
 };
+
+
+
+

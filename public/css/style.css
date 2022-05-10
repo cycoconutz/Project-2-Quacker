@@ -42,6 +42,9 @@ header h1 {
     color: var(--bill);
 }
 
+.input-field label {
+    pointer-events: all !important;
+}
 
 #Q {
     font-weight: 700;

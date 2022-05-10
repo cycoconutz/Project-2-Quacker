@@ -3,6 +3,28 @@ const { User, Post, Comment, ProfileImage } = require("../models");
 // Import the custom middleware
 const withAuth = require("../utils/auth");
 
+router.post('/', async (req, res) => {
+  try {
+    const newUser = await User.create({
+      first_name: req.body.firstname,
+      last_name: req.body.lastname,
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+    });
+
+    req.session.save(() => {
+      req.session.userId = newUser.id;
+      req.session.username = newUser.username;
+      req.session.loggedIn = true;
+
+      res.json(newUser);
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // GET all Posts for homepage
 router.get("/", async (req, res) => {
   console.log("req.session", req.session);
@@ -143,6 +165,38 @@ router.get("/login", (req, res) => {
   }
 
   res.render("pondfeed");
+});
+// Supposed to Compare Login input to DB values
+router.post('/login', async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+
+    if (!user) {
+      res.status(400).json({ message: 'No user account found!' });
+      return;
+    }
+
+    const validPassword = user.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'No user account found!' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.userId = user.id;
+      req.session.username = user.username;
+      req.session.loggedIn = true;
+
+      res.json({ user, message: 'You are now logged in!' });
+    });
+  } catch (err) {
+    res.status(400).json({ message: 'No user account found!' });
+  }
 });
 
 router.get("/signup", (req, res) => {

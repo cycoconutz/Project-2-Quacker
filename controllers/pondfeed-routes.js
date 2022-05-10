@@ -50,9 +50,6 @@ router.get("/", async (req, res) => {
 
 // GET one post *****
 // Use the custom middleware before allowing the user to access the post withAuth
-// Error: Failed to lookup view "post" in views directory 
-// "C:\Users\hunte\Desktop\Coding-Bootcamp\Group-Projects\Project-2-Quacker\views"
-// needs handlebar view
 router.get("/post/:id", async (req, res) => {
   try {
     const dbPostData = await Post.findOne(req.params.id, {

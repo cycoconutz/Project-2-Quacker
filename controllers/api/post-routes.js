@@ -1,38 +1,35 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // get ALL posts
 router.get('/', async (req, res) => {
   try {
-  const dbPostData = await Post.findAll({
-    // exclude creation and updated date, can remove and will work fine
-      attributes: { exclude: ['createdAt', 'updatedAt']}
-  })
+    const dbPostData = await Post.findAll({
+      // exclude creation and updated date, can remove and will work fine
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
 
-  res.status(200).json(dbPostData);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    res.status(200).json(dbPostData);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
 // get single post
 router.get('/:id', async (req, res) => {
   try {
-  const dbPostData = await Post.findOne({
-      attributes: { exclude: ['createdAt', 'updatedAt']},
+    const dbPostData = await Post.findOne({
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
       where: { id: req.params.id },
+    });
 
-  })
-
-  res.status(200).json(dbPostData);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    res.status(200).json(dbPostData);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
 // CREATE new post
@@ -40,10 +37,11 @@ router.post('/', withAuth, async (req, res) => {
   console.log('entered the post req');
   try {
     const newPost = await Post.create({
+      attributes: ['username'],
+      include: [{ model: User }],
       ...req.body,
-      user_id: req.session.user_id,
     });
-    res.status(200).json(newPost);
+    res.status(200).json(newPost + req.session.username);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -51,36 +49,32 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // delete post
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
-  const deletePost = await Post.destroy({
+    const deletePost = await Post.destroy({
       where: { id: req.params.id },
-  })
-  res.json(deletePost);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    });
+    res.json(deletePost);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
 // Update Post
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
-  const updatePost = await Post.update({
-      where: { id: req.params.id,
-      },
-  })
-  res.json(updatePost);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    const updatePost = await Post.update({
+      where: { id: req.params.id },
+    });
+    res.json(updatePost);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
 });
 
-
-// Do we need these? 
+// Do we need these?
 // Login
 router.post('/login', async (req, res) => {
   try {

@@ -86,7 +86,6 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Do we need these?
 // Login
 router.post('/login', async (req, res) => {
   try {

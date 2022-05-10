@@ -34,8 +34,8 @@ router.get("/", async (req, res) => {
     
     const posts = dbPostData.map((post) => post.get({ plain: true }));
 
-    console.log(dbPostData);
-    console.log(posts);
+    // console.log(dbPostData);
+    // console.log(posts);
 
     res.render("homepage", {
       posts,
@@ -126,7 +126,7 @@ router.get("/user/:id", async (req, res) => {
         res.status(404).json({ message: "User doesn't exist."});
       };
 
-      console.log("User Data", dbUserData);
+      // console.log("User Data", dbUserData);
 
     const post = dbUserData.get({ plain: true });
     res.render("user", { post, loggedIn: req.session.loggedIn });

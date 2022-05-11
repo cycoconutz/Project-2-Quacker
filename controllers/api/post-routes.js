@@ -13,26 +13,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', withAuth, async (req, res) => {
-  const message = req.message
-  try {
-    const newPost = await Post.create({
-      ...message,
-      username: req.session.userId
-    });
-    res.json(newPost);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-})
 
 router.post('/', withAuth, async (req, res) => {
   console.log('entered the post req');
   try {
     const newPost = await Post.create({
+      // message: req.body,
       attributes: ['username'],
       include: [{ model: User }],
       ...req.body,
+      user_id: req.session.id,
+
     });
     res.status(200).json(newPost + req.session.username);
   } catch (err) {

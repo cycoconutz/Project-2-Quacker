@@ -1,7 +1,7 @@
-// const postBtn = document.getElementById('post-btn');
+const postBtn = document.querySelector('#post-btn');
 console.log('starting')
 
-const createPostHandler = async function (event) {
+async function createPostHandler(event) {
   event.preventDefault();
   console.log('posting')
 
@@ -9,8 +9,9 @@ const createPostHandler = async function (event) {
   console.log(postMessage)
   await fetch(`/api/post/`, {
     method: 'POST',
-    message: JSON.stringify({
-      postMessage,
+    body: JSON.stringify({
+      message: postMessage,
+      user_id: req.session.id
     }),
     headers: { 'Content-Type': 'application/json' },
   });

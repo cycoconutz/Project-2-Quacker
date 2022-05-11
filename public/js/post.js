@@ -1,22 +1,24 @@
-const postBtn = document.getElementById('post-btn');
+// const postBtn = document.getElementById('post-btn');
+console.log('starting')
+
 const createPostHandler = async function (event) {
   event.preventDefault();
+  console.log('posting')
 
   const postMessage = document.querySelector('#textarea1').value;
-
-  const response = await fetch('/api/post/', {
+  console.log(postMessage)
+  await fetch(`/api/post/`, {
     method: 'POST',
-    body: JSON.stringify({
-      message: postMessage,
+    message: JSON.stringify({
+      postMessage,
     }),
     headers: { 'Content-Type': 'application/json' },
   });
 
-  if (response.ok) {
-    document.location.replace('/pond');
-  } else {
-    alert('Failed to login');
-  }
+
+  document.location.replace('/pond');
 };
 
-postBtn.addEventListener('submit', createPostHandler);
+document
+  .querySelector('#new-post-form')
+  .addEventListener('submit', createPostHandler);

@@ -13,4 +13,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.post('/', withAuth, async (req, res) => {
+  const message = req.message
+  try {
+    const newPost = await Post.create({
+      ...message,
+      username: req.session.userId
+    });
+    res.json(newPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
 module.exports = router;

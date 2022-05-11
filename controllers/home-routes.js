@@ -3,6 +3,28 @@ const { User, Post, Comment, ProfileImage } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
+router.post('/', async (req, res) => {
+  try {
+    const newUser = await User.create({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email,
+    });
+
+    req.session.save(() => {
+      req.session.userId = newUser.id;
+      req.session.username = newUser.username;
+      req.session.loggedIn = true;
+
+      res.json(newUser);
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // GET all Posts for homepage
 router.get('/', async (req, res) => {
   console.log('req.session', req.session);
@@ -77,7 +99,9 @@ router.get('/post/:id', async (req, res) => {
       ],
     });
 
-    // if post doesnt exist...
+    console.log('Post Data', dbPostData);
+
+    // if post doesn't exist...
     if (!dbPostData) {
       res.status(404).json({ message: 'Post does not exist.' });
     }
@@ -122,6 +146,8 @@ router.get('/user/:id', async (req, res) => {
       res.status(404).json({ message: "User doesn't exist." });
     }
 
+    console.log('User Data', dbUserData);
+
     const post = dbUserData.get({ plain: true });
     res.render('user', { post, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -136,7 +162,39 @@ router.get('/login', (req, res) => {
     return;
   }
 
-  res.render('login');
+  res.render('pond');
+});
+// Supposed to Compare Login input to DB values
+router.post('/login', async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        username: req.body.username,
+      },
+    });
+
+    if (!user) {
+      res.status(400).json({ message: 'No user account found!' });
+      return;
+    }
+
+    const validPassword = user.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res.status(400).json({ message: 'No user account found!' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.userId = user.id;
+      req.session.username = user.username;
+      req.session.loggedIn = true;
+
+      res.json({ user, message: 'You are now logged in!' });
+    });
+  } catch (err) {
+    res.status(400).json({ message: 'No user account found!' });
+  }
 });
 
 router.get('/signup', (req, res) => {
@@ -165,12 +223,12 @@ router.get('/user', (req, res) => {
   res.render('user');
 });
 
-router.get('/pondfeed', (req, res) => {
+router.get('/pond', (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-  res.render('pondfeed');
+  res.render('pond');
 });
 
 module.exports = router;

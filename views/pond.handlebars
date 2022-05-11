@@ -6,54 +6,49 @@
     <ul id='nav-mobile' class='left hide-on-med-and-down'>
       <li><a href='/pond'>Home</a></li>
       <li><a href='/'>LogIn</a></li>
-      <li><a href='#'>Log Out</a></li>
+      <li><a href='#' id="logout-link">Log Out</a></li>
     </ul>
-  </div>
-</nav>
-<main>
-  <div class='row'>
-    <form id="new-post-form" class="col s12">
-
-      <!-- left sidebar -->
-      <div class="row p">
-        <div class="row">
-          <div class="input-field col s12 m4 l3">
-            <label for="textarea1">New Post</label>
-            <textarea id="textarea1" name="post-message" class="materialize-textarea"></textarea>
+    <header>
+      <div class="row">
+        <button id="logout-link" class=" logoutBtn  btn waves-effect waves-teal" type="submit" name="action">Logout
+        </button>
+      </div>
+    </header>
+    <main>
+      <div class='row'>
+        <!-- left sidebar -->
+        <div class="row p">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12 m4 l3">
+                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <label for="textarea1">New Post</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class='col s12 m4 l3'>
+          <a class='waves-effect waves-light btn-large' id='post-btn'><i class='material-icons left'>comment</i>Post</a>
+        </div>
+      </div>
+      <!-- end left -->
+      <!-- main -->
+      {{#each posts as |post|}}
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{post.User.username}}{{post.User.profileImage_id}} </span>
+              <p>{{post.message}}</p>
+            </div>
+            <div class="card-action">
+              <a class="waves-effect waves-blue btn-flat" id="likeBtn"><i class="fa-solid fa-egg"></i> Like</a>
+              <a class="waves-effect waves-blue btn-flat" id="replyBtn">Reply</a>
+            </div>
           </div>
         </div>
       </div>
-      <div class='col s12 m4 l3'>
-        <button class="btn waves-effect waves-light" id="post-btn" type="submit" name="action">Post
-          <i class="material-icons left">comment</i>
-        </button>
+      {{/each}}
+    </main>
 
-
-      </div>
-    </form>
-  </div>
-
-  <!-- end left -->
-
-  <!-- main -->
-  {{#each posts as |post|}}
-
-  <div class="row">
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">{{post.User.username}}{{post.User.profileImage_id}} </span>
-          <p>{{post.message}}</p>
-        </div>
-        <div class="card-action">
-          <a class="waves-effect waves-blue btn-flat" id="likeBtn"><i class="fa-solid fa-egg"></i> Like</a>
-          <a class="waves-effect waves-blue btn-flat" id="replyBtn">Reply</a>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  {{/each}}
-</main>
-
-<script src="/js/post.js"></script>
+    <script src="/js/post.js"></script>

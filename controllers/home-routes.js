@@ -4,7 +4,7 @@ const { User, Post, Comment, ProfileImage } = require('../models');
 const withAuth = require('../utils/auth');
 
 //Populates Pond with All Posts
-router.get('/pond', withAuth, async (req, res) => {
+router.get('/pond', async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [{ all: true, nested: true }]

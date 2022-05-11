@@ -20,3 +20,15 @@ const createPostHandler = async function (event) {
 };
 
 postBtn.addEventListener('submit', createPostHandler);
+
+// Like counter
+
+const likeBTN = document.querySelector('#likeBtn');
+const count = document.querySelector('#likeCount');
+
+// onclick
+
+
+likeBTN.addEventListener('click', () => {
+    count.textContent++;
+});

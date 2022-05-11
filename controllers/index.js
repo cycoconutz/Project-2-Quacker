@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const express = require("express");
-
-const app = express();
-
 const apiRoutes = require("./api");
 const homeRoutes = require("./home-routes.js");
+<<<<<<< HEAD
 const pondRoutes = require("./pond-routes");
+=======
+const pondRoutes = require("./pond-routes.js");
+>>>>>>> main
 
 
 router.use("/", homeRoutes);

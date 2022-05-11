@@ -37,12 +37,9 @@ router.post('/', withAuth, async (req, res) => {
   console.log('entered the post req');
   try {
     const newPost = await Post.create({
-      // message: req.body,
       attributes: ['username'],
       include: [{ model: User }],
       ...req.body,
-      user_id: req.session.id,
-
     });
     res.status(200).json(newPost + req.session.username);
   } catch (err) {

@@ -87,12 +87,12 @@ router.put('/:id', async (req, res) => {
 });
 
 // Do we need these?
-// Login
+// Login -- This is the one that works
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
-        email: req.body.email,
+        username: req.body.username,
       },
     });
 
@@ -129,7 +129,7 @@ router.post('/login', async (req, res) => {
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
-      res.status(204).end({ message: 'You are logged out' });
+      res.status(204).end();
     });
   } else {
     res.status(404).end();

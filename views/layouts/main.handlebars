@@ -10,24 +10,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://kit.fontawesome.com/bef1dac75c.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 
 </head>
 
 <body>
   <header>
+    <div class="row">
+      <button id="logout-link" class=" logoutBtn  btn waves-effect waves-teal col s1 push-s11" type="submit"
+        name="action">Logout
+      </button>
+    </div>
     <h1>
       <span id="Q">Q</span>uacker
     </h1>
+
+
   </header>
   <main class="container">
     {{{body}}}
   </main>
+  <script src="/js/logout.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  {{!--
-  <script src="/js/logout.js"></script> --}}
 </body>
 
 </html>

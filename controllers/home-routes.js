@@ -46,7 +46,6 @@ router.get('/pond', (req, res) => {
   res.render('pond');
 });
 
-<<<<<<< HEAD
 //Create Account
 // router.post('/', async (req, res) => {
 //   try {
@@ -221,6 +220,4 @@ router.get('/pond', (req, res) => {
 //   res.render("user");
 // });
 
-=======
->>>>>>> fc6f43793bd73b70c4becaf33244d1da6d5a4209
 module.exports = router;

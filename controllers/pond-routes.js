@@ -150,13 +150,19 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-// render one post from homepage
-router.get("/post", (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect("/login");
-    return;
+// get ALL posts
+router.get('/', async (req, res) => {
+  try {
+    const dbPostData = await Post.findAll({
+      // exclude creation and updated date, can remove and will work fine
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    });
+
+    res.status(200).json(dbPostData);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
   }
-  res.render("post");
 });
 
 // render one user profile from homepage

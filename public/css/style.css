@@ -2,7 +2,7 @@
     --ltbrown: rgb(142, 105, 75);
     --ltforest: #86938F;
     --medforest: #5E877F;
-    --forest: #6C6B67;
+    --forest: #14213D;
     --light: #E3E4E3;
     --dkbrown: rgb(15, 28, 17);
     --blue: rgb(51, 50, 185);
@@ -36,11 +36,17 @@ header {
     color: var(--light);
 }
 
-header h1 {
+h1 {
     font-family: 'Cinzel Decorative', cursive;
     font-size: 4.5rem;
     font-weight: 400;
     color: var(--bill);
+    text-align: center;
+}
+
+nav {
+    background-color: var(--blue);
+
 }
 
 .input-field label {

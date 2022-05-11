@@ -41,4 +41,30 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+// delete post
+router.delete('/:id', async (req, res) => {
+  try {
+    const deletePost = await Post.destroy({
+      where: { id: req.params.id },
+    });
+    res.json(deletePost);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
+});
+
+// Update Post
+router.put('/:id', async (req, res) => {
+  try {
+    const updatePost = await Post.update({
+      where: { id: req.params.id },
+    });
+    res.json(updatePost);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
+});
+
 module.exports = router;

@@ -87,3 +87,10 @@ form .input-field :focus {
 .logo {
     width: 60px;
 }
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

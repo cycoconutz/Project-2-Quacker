@@ -3,6 +3,22 @@ const { User, Post, Comment, ProfileImage } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
+//Populates Pond with All Posts
+router.get('/pond', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [{ all: true, nested: true }]
+    });
+    const posts = postData.map((post) => post.get({ plain: true }));
+    res.render('pond', {
+      posts,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 //Loads Homepage
 router.get('/', (req, res) => {
   if (req.session.loggedIn) {
@@ -30,6 +46,7 @@ router.get('/pond', (req, res) => {
   res.render('pond');
 });
 
+<<<<<<< HEAD
 //Create Account
 // router.post('/', async (req, res) => {
 //   try {
@@ -204,4 +221,6 @@ router.get('/pond', (req, res) => {
 //   res.render("user");
 // });
 
+=======
+>>>>>>> fc6f43793bd73b70c4becaf33244d1da6d5a4209
 module.exports = router;

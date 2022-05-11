@@ -23,10 +23,10 @@ router.get("/signup", (req, res) => {
 
 //Loads Pond
 router.get("/pond", (req, res) => {
-  if (!req.session.loggedIn) {
-    res.redirect("/");
-    return;
-  }
+  // if (!req.session.loggedIn) {
+  //   res.redirect("/");
+  //   return;
+  // }
   res.render("pond");
 });
 

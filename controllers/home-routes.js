@@ -46,29 +46,6 @@ router.get('/pond', (req, res) => {
   res.render('pond');
 });
 
-//Create Account
-// router.post('/', async (req, res) => {
-//   try {
-//     const newUser = await User.create({
-//       first_name: req.body.firstname,
-//       last_name: req.body.lastname,
-//       username: req.body.username,
-//       password: req.body.password,
-//       email: req.body.email,
-//     });
-
-//     req.session.save(() => {
-//       req.session.userId = newUser.id;
-//       req.session.username = newUser.username;
-//       req.session.loggedIn = true;
-
-//       res.json(newUser);
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 // GET all Posts for homepage
 // router.get("/", async (req, res) => {
 //   console.log("req.session", req.session);

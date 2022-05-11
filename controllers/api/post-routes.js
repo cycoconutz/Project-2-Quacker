@@ -26,4 +26,19 @@ router.post('/', withAuth, async (req, res) => {
   }
 })
 
+router.post('/', withAuth, async (req, res) => {
+  console.log('entered the post req');
+  try {
+    const newPost = await Post.create({
+      attributes: ['username'],
+      include: [{ model: User }],
+      ...req.body,
+    });
+    res.status(200).json(newPost + req.session.username);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

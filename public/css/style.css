@@ -58,3 +58,7 @@ header h1 {
 .logoutBtn {
     background-color: var(--red);
 }
+
+.logo {
+    width: 60px;
+}

@@ -1,28 +1,79 @@
+<<<<<<< HEAD
+<!-- nav bar -->
+<nav>
+  <div class='nav-wrapper'>
+    <a href='#' class='brand-logo right'><img
+        class='logo circle responsive-img valign'
+        src='/images/QuackerLogo.png'
+        alt='Quacker Logo'
+      /></a>
+    <ul id='nav-mobile' class='left hide-on-med-and-down'>
+      <li><a href='/pond'>Home</a></li>
+      <li><a href='/'>LogIn</a></li>
+      <li><a href='#'>Log Out</a></li>
+    </ul>
+=======
 <header>
   <div class="row">
     <button id="logout-link" class=" logoutBtn  btn waves-effect waves-teal" type="submit" name="action">Logout
     </button>
+>>>>>>> fc6f43793bd73b70c4becaf33244d1da6d5a4209
   </div>
 </header>
 <main>
-  <div class="row">
+  <div class='row'>
     <!-- left sidebar -->
+<<<<<<< HEAD
+
+    <div class='row p'>
+      <form class='col s12'>
+        <div class='row'>
+          <div class='input-field col s12 m4 l3'>
+            <textarea id='textarea1' class='materialize-textarea'></textarea>
+            <label for='textarea1'>New Post</label>
+=======
     <div class="row p">
       <form class="col s12">
         <div class="row">
           <div class="input-field col s12 m4 l3">
             <textarea id="textarea1" class="materialize-textarea"></textarea>
             <label for="textarea1">New Post</label>
+>>>>>>> fc6f43793bd73b70c4becaf33244d1da6d5a4209
           </div>
         </div>
       </form>
     </div>
-    <div class="col s12 m4 l3">
-      <a class="waves-effect waves-light btn-large"><i class="material-icons left">comment</i>Post</a>
+    <div class='col s12 m4 l3'>
+      <a class='waves-effect waves-light btn-large' id='post-btn'><i
+          class='material-icons left'
+        >comment</i>Post</a>
     </div>
   </div>
 
+<<<<<<< HEAD
+    <!-- main -->
+    <div class='row'>
+      <div class='col s12 m6'>
+        <div class='card blue-grey darken-1'>
+          <div class='card-content white-text'>
+            <span class='card-title'>{{userdata.username}}</span>
+            <p>{{post}}</p>
+          </div>
+          <div class='card-action'>
+            <a class='waves-effect waves-blue btn-flat' id='likeBtn'><i
+                class='fa-solid fa-egg'
+              ></i>
+              Like</a>
+            <a class='waves-effect waves-blue btn-flat' id='replyBtn'>Reply</a>
+            <div class='card blue-grey darken-1'>
+              <div class='card-content white-text'>
+                <span class='card-title'>{{userdata.username}}</span>
+                <p>{{post}}</p>
+              </div>
+            </div>
+=======
   <!-- end left -->
+>>>>>>> fc6f43793bd73b70c4becaf33244d1da6d5a4209
 
   <!-- main -->
   {{#each posts as |post|}}

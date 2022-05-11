@@ -5,12 +5,12 @@ const createPostHandler = async function (event) {
   event.preventDefault();
   console.log('posting')
 
-  const postMessage = document.querySelector('#textarea1').value;
-  console.log(postMessage)
+  const message = document.querySelector('#textarea1').value;
+  console.log(message)
   await fetch(`/api/post/`, {
     method: 'POST',
-    message: JSON.stringify({
-      postMessage,
+    body: JSON.stringify({
+      message
     }),
     headers: { 'Content-Type': 'application/json' },
   });
@@ -19,7 +19,7 @@ const createPostHandler = async function (event) {
   document.location.replace('/pond');
 };
 
-postBtn.addEventListener('submit', createPostHandler);
+document.querySelector('#post-btn').addEventListener('click', createPostHandler);
 
 // Like counter
 

@@ -2,7 +2,7 @@ const signupFormHandler = async function (event) {
     event.preventDefault();
     console.log('creating')
     const firstnameEl = document.querySelector('#firstname-input-signup');
-    const lastnameEl = document.querySelector('#last_name-input-signup');
+    const lastnameEl = document.querySelector('#lastname-input-signup');
     const emailEl = document.querySelector('#email-input-signup');
     const usernameEl = document.querySelector('#username-input-signup');
     const passwordEl = document.querySelector('#password-input-signup');

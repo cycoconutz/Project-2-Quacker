@@ -1,35 +1,22 @@
-const postBtn = document.querySelector('#post-btn');
-console.log('starting')
+// Create a Delete functionality
+const postId = window.location.toString().split('/')[
+  window.location.toString().split('/').length - 1
+];
 
-async function createPostHandler(event) {
+async function deletePostHandler(event) {
   event.preventDefault();
-  console.log('posting')
 
-  const message = document.querySelector('#textarea1').value;
-  console.log(message)
-  await fetch(`/api/post/`, {
-    method: 'POST',
-    body: JSON.stringify({
-      message
-    }),
+  await fetch(`/api/post/${postId}`, {
+    method: 'DELETE',
+    //   body: JSON.stringify({
+    //     id: post_id
+    //   }),
     headers: { 'Content-Type': 'application/json' },
   });
 
-
   document.location.replace('/pond');
-};
-
-document.querySelector('.post-btn').addEventListener('click', createPostHandler);
-
-
-const deleteClickHandler = async function () {
-  await fetch(`/api/post/${postId}`, {
-    method: 'DELETE'
-  });
-
-  document.location.replace('/pond');
-};
+}
 
 document
-  .querySelector('#delete-btn')
-  .addEventListener('click', deleteClickHandler);
+  .querySelector('#deleteBtn')
+  .addEventListener('click', deletePostHandler);

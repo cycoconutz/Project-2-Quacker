@@ -70,27 +70,58 @@ router.delete('/:id', withAuth, async (req, res) => {
         id: req.params.id,
       },
     });
-    if (!affectedRows) {
-      res.status(404).json({ message: 'No post found with that id!' }).end();
+    if (!deletePost) {
+      res.status(404).json({ message: 'No post was found with that Id' });
+      return;
     }
-    res.status(200).json({ message: `Post id ${req.params.id} deleted!` }).end();
+    res.status(200).json(deletePost);
+  } catch (err) {
+    res.status(500).json(err);
+    console.log(err);
+    if (err) throw err;
+  }
+});
+// router.delete('/:id', async (req, res) => {
+//   // delete on tag by its `id` value
+//   try {
+//     const tagData = await Tag.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     res.status(200).json(tagData);
+//     if (!tagData) {
+//       res.status(404).json({ message: 'No tag was found' });
+//       return;
+//     }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+// Update Post
+router.put('/:id', async (req, res) => {
+  try {
+    const updatePost = await Post.update(
+      {
+        message: req.body.message,
+        likes: req.body.likes,
+        post_id: req.body.post_id,
+        user_id: req.body.user_id
+      },
+      {
+        where: {
+          id: req.params.id
+        },
+      }
+    );
+    return res.json(updatePost);
+
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Update Post
-router.put('/:id', async (req, res) => {
-  try {
-    const updatePost = await Post.update({
-      where: { id: req.params.id },
-    });
-    res.json(updatePost);
-  } catch (err) {
-    console.log(err);
-    if (err) throw err;
-  }
-});
 
 
 // Update Likes

@@ -2,14 +2,25 @@ const router = require('express').Router();
 const { User, Post, Comment, ProfileImage } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
+const { session } = require("passport");
 
 //Populates Pond with All Posts
 router.get('/pond', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
-      include: [{ all: true, nested: true }]
+      include: [{ all: true, nested: true }],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
+
+    let loginStatus; 
+
+    if (typeof req.session.passport != "undefined") {
+      loginStatus = req.session.passport.user;
+      console.log("loginStatus", loginStatus);
+    } else {
+      loginStatus = false;
+    }
+
     res.render('pond', {
       posts,
     });
@@ -54,6 +65,14 @@ router.get('/post/:id', async (req, res) => {
       include: [{ all: true, nested: true }]
     });
     const post = postData.get({ plain: true });
+
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+      loginStatus =  req.session.passport.user;
+    } else {
+        loginStatus = false;
+    }   
+    
     res.render('post', {
       post
     });
@@ -62,6 +81,32 @@ router.get('/post/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// Update Post
+router.put('/:id', async (req, res) => {
+  try {
+    const updatePost = await Post.update(
+      {
+        message: req.body.message,
+        likes: req.body.likes,
+        post_id: req.body.post_id,
+        user_id: req.body.user_id
+      },
+      {
+      where: { 
+        id: req.params.id
+       },
+      }
+    );
+    return res.json(updatePost);
+
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
+});
+
+// console.log("session", session);
 
 // GET all Posts for homepage
 // router.get("/", async (req, res) => {

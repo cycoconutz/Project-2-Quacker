@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment, ProfileImage } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
+const { session } = require("passport");
 
 //Populates Pond with All Posts
 router.get('/pond', async (req, res) => {
@@ -10,6 +11,16 @@ router.get('/pond', async (req, res) => {
       include: [{ all: true, nested: true }]
     });
     const posts = postData.map((post) => post.get({ plain: true }));
+
+    let loginStatus; 
+
+    if (typeof req.session.passport != "undefined") {
+      loginStatus = req.session.passport.user;
+      console.log("loginStatus", loginStatus);
+    } else {
+      loginStatus = false;
+    }
+
     res.render('pond', {
       posts,
     });
@@ -54,6 +65,14 @@ router.get('/post/:id', async (req, res) => {
       include: [{ all: true, nested: true }]
     });
     const post = postData.get({ plain: true });
+
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+      loginStatus =  req.session.passport.user;
+    } else {
+        loginStatus = false;
+    }   
+    
     res.render('post', {
       post
     });
@@ -87,6 +106,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// console.log("session", session);
 
 // GET all Posts for homepage
 // router.get("/", async (req, res) => {

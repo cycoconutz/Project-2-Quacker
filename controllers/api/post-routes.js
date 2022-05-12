@@ -54,12 +54,34 @@ router.delete('/:id', async (req, res) => {
     const deletePost = await Post.destroy({
       where: { id: req.params.id },
     });
-    res.json(deletePost);
+    if (!deletePost) {
+      res.status(404).json({ message: 'No post was found with that Id' });
+      return;
+    }
+    res.status(200).json(deletePost);
   } catch (err) {
+    res.status(500).json(err);
     console.log(err);
     if (err) throw err;
   }
 });
+// router.delete('/:id', async (req, res) => {
+//   // delete on tag by its `id` value
+//   try {
+//     const tagData = await Tag.destroy({
+//       where: {
+//         id: req.params.id,
+//       },
+//     });
+//     res.status(200).json(tagData);
+//     if (!tagData) {
+//       res.status(404).json({ message: 'No tag was found' });
+//       return;
+//     }
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // Update Post
 router.put('/:id', async (req, res) => {

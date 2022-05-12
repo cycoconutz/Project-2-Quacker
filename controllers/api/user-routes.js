@@ -49,6 +49,7 @@ router.post('/', async (req, res) => {
       // if loggedIn isn't a current property of req.session it will create one with the variable true
       req.session.loggedIn = true;
       req.session.username = dbUserData.username;
+      req.session.user_id = dbUserData.id;
 
       res.status(200).json(dbUserData);
     });

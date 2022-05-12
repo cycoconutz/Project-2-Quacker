@@ -8,7 +8,7 @@ const { session } = require("passport");
 router.get('/pond', async (req, res) => {
   try {
     const postData = await Post.findAll({
-      include: [{ all: true, nested: true }]
+      include: [{ all: true, nested: true }],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
 

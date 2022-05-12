@@ -86,15 +86,27 @@ router.delete('/:id', async (req, res) => {
 // Update Post
 router.put('/:id', async (req, res) => {
   try {
-    const updatePost = await Post.update({
-      where: { id: req.params.id },
-    });
-    res.json(updatePost);
+    const updatePost = await Post.update(
+      {
+        message: req.body.message,
+        likes: req.body.likes,
+        post_id: req.body.post_id,
+        user_id: req.body.user_id
+      },
+      {
+      where: { 
+        id: req.params.id
+       },
+      }
+    );
+    return res.json(updatePost);
+
   } catch (err) {
     console.log(err);
     if (err) throw err;
   }
 });
+
 
 // // Do we need these?
 // // Login

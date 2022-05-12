@@ -7,6 +7,8 @@ router.get('/', async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
       // exclude creation and updated date, can remove and will work fine
+      include: [{ all: true, nested: true }],
+
       attributes: { exclude: ['createdAt', 'updatedAt'] },
     });
 
@@ -49,15 +51,31 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // delete post
-router.delete('/:id', async (req, res) => {
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const deletePost = await Post.destroy({
+//       where: { id: req.params.id },
+//     });
+//     res.json(deletePost);
+//   } catch (err) {
+//     console.log(err);
+//     if (err) throw err;
+//   }
+// });
+
+router.delete('/:id', withAuth, async (req, res) => {
   try {
-    const deletePost = await Post.destroy({
-      where: { id: req.params.id },
+    const affectedRows = Post.destroy({
+      where: {
+        id: req.params.id,
+      },
     });
-    res.json(deletePost);
+    if (!affectedRows) {
+      res.status(404).json({ message: 'No post found with that id!' }).end();
+    }
+    res.status(200).json({ message: `Post id ${req.params.id} deleted!` }).end();
   } catch (err) {
-    console.log(err);
-    if (err) throw err;
+    res.status(500).json(err);
   }
 });
 

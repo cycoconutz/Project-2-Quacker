@@ -1,5 +1,6 @@
 const signupFormHandler = async function (event) {
     event.preventDefault();
+    console.log('creating')
     const firstnameEl = document.querySelector('#firstname-input-signup');
     const lastnameEl = document.querySelector('#lastname-input-signup');
     const emailEl = document.querySelector('#email-input-signup');

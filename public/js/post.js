@@ -19,4 +19,17 @@ async function createPostHandler(event) {
   document.location.replace('/pond');
 };
 
-document.querySelector('#post-btn').addEventListener('click', createPostHandler);
+document.querySelector('.post-btn').addEventListener('click', createPostHandler);
+
+
+const deleteClickHandler = async function () {
+  await fetch(`/api/post/${postId}`, {
+    method: 'DELETE'
+  });
+
+  document.location.replace('/pond');
+};
+
+document
+  .querySelector('#delete-btn')
+  .addEventListener('click', deleteClickHandler);

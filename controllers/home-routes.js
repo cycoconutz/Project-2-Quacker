@@ -2,21 +2,21 @@ const router = require('express').Router();
 const { User, Post, Comment, ProfileImage } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
-const { session } = require("passport");
+const { session } = require('passport');
 
 //Populates Pond with All Posts
-router.get('/pond', async (req, res) => {
+router.get('/pond', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [{ all: true, nested: true }],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    let loginStatus; 
+    let loginStatus;
 
-    if (typeof req.session.passport != "undefined") {
+    if (typeof req.session.passport != 'undefined') {
       loginStatus = req.session.passport.user;
-      console.log("loginStatus", loginStatus);
+      console.log('loginStatus', loginStatus);
     } else {
       loginStatus = false;
     }
@@ -49,7 +49,7 @@ router.get('/signup', (req, res) => {
 });
 
 //Loads Pond
-router.get('/pond', (req, res) => {
+router.get('/pond', withAuth, (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/');
     return;
@@ -57,24 +57,24 @@ router.get('/pond', (req, res) => {
   res.render('pond');
 });
 
-// 
+//
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findOne({
       where: { id: req.params.id },
-      include: [{ all: true, nested: true }]
+      include: [{ all: true, nested: true }],
     });
     const post = postData.get({ plain: true });
 
     let loginStatus;
     if (typeof req.session.passport != 'undefined') {
-      loginStatus =  req.session.passport.user;
+      loginStatus = req.session.passport.user;
     } else {
-        loginStatus = false;
-    }   
-    
+      loginStatus = false;
+    }
+
     res.render('post', {
-      post
+      post,
     });
   } catch (err) {
     console.log(err);
@@ -90,16 +90,15 @@ router.put('/:id', async (req, res) => {
         message: req.body.message,
         likes: req.body.likes,
         post_id: req.body.post_id,
-        user_id: req.body.user_id
+        user_id: req.body.user_id,
       },
       {
-      where: { 
-        id: req.params.id
-       },
+        where: {
+          id: req.params.id,
+        },
       }
     );
     return res.json(updatePost);
-
   } catch (err) {
     console.log(err);
     if (err) throw err;

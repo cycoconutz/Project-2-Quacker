@@ -7,6 +7,8 @@ router.get('/', async (req, res) => {
   try {
     const dbPostData = await Post.findAll({
       // exclude creation and updated date, can remove and will work fine
+      include: [{ all: true, nested: true }],
+
       attributes: { exclude: ['createdAt', 'updatedAt'] },
     });
 
@@ -49,10 +51,24 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // delete post
-router.delete('/:id', async (req, res) => {
+// router.delete('/:id', async (req, res) => {
+//   try {
+//     const deletePost = await Post.destroy({
+//       where: { id: req.params.id },
+//     });
+//     res.json(deletePost);
+//   } catch (err) {
+//     console.log(err);
+//     if (err) throw err;
+//   }
+// });
+
+router.delete('/:id', withAuth, async (req, res) => {
   try {
-    const deletePost = await Post.destroy({
-      where: { id: req.params.id },
+    const deletePost = Post.destroy({
+      where: {
+        id: req.params.id,
+      },
     });
     if (!deletePost) {
       res.status(404).json({ message: 'No post was found with that Id' });
@@ -89,24 +105,41 @@ router.put('/:id', async (req, res) => {
     const updatePost = await Post.update(
       {
         message: req.body.message,
-        likes: req.body.likes,
-        post_id: req.body.post_id,
-        user_id: req.body.user_id
+        user_id: req.session.user_id,
       },
       {
-      where: { 
-        id: req.params.id
-       },
+        where: {
+          id: req.params.id,
+        },
       }
     );
-    return res.json(updatePost);
-
+    console.log(req.body);
+    return res.status(200).json(updatePost);
   } catch (err) {
-    console.log(err);
-    if (err) throw err;
+    res.status(500).json(err);
   }
 });
 
+// Update Likes
+// Found this example online
+// Model.update(
+//   { seq: sequelize.literal('seq + 5') },
+//   { where: { id: model_id } }
+// );
+// router.put('/', async (req, res) => {
+//   try {
+//     const updateLikes = await Post.update(
+//       { seq: likes.literal('seq + 1') },
+//       {
+//         where: { id: Post.id },
+//       }
+//     );
+//     res.json(updateLikes);
+//   } catch (err) {
+//     console.log(err);
+//     if (err) throw err;
+//   }
+// });
 
 // // Do we need these?
 // // Login

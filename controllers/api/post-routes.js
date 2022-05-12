@@ -74,6 +74,29 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+
+// Update Likes
+// Found this example online
+// Model.update(
+//   { seq: sequelize.literal('seq + 5') },
+//   { where: { id: model_id } }
+// );
+router.put('/', async (req, res) => {
+  try {
+    const updateLikes = await Post.update(
+      { seq: likes.literal('seq + 1') },
+      {
+        where: { id: Post.id }
+      });
+    res.json(updateLikes);
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
+});
+
+
+
 // // Do we need these?
 // // Login
 // router.post('/login', async (req, res) => {

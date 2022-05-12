@@ -53,6 +53,11 @@ nav {
     pointer-events: all !important;
 }
 
+.card-title {
+    color: var(--bill);
+    border-bottom: 2px solid white;
+}
+
 #Q {
     font-weight: 700;
 }
@@ -98,10 +103,17 @@ form .input-field :focus {
     display: block;
 }
 
-.commentTable, 
-tr, td {
+.commentTable,
+tr,
+td {
     border: none;
 }
+
+.orangeText {
+    color: var(--bill);
+
+}
+
 /* end post page css */
 
 .flexbox {

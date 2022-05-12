@@ -3,6 +3,7 @@ const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Where to use withAuth helper?
+// Don't think we need it here
 
 // get ALL users
 router.get('/', async (req, res) => {

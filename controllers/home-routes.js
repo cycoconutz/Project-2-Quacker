@@ -4,7 +4,7 @@ const { User, Post, Comment, ProfileImage } = require('../models');
 const withAuth = require('../utils/auth');
 
 //Populates Pond with All Posts
-router.get('/pond', async (req, res) => {
+router.get('/pond', withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [{ all: true, nested: true }]
@@ -38,7 +38,7 @@ router.get('/signup', (req, res) => {
 });
 
 //Loads Pond
-router.get('/pond', (req, res) => {
+router.get('/pond', withAuth, (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/');
     return;
@@ -46,7 +46,7 @@ router.get('/pond', (req, res) => {
   res.render('pond');
 });
 
-// 
+//
 router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findOne({

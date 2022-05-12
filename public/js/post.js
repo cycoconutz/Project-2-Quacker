@@ -25,10 +25,12 @@ document.querySelector('#post-btn').addEventListener('click', createPostHandler)
 
 const likeBTN = document.querySelector('#likeBtn');
 const count = document.querySelector('#likeCount');
+let integer = 0;
 
 // onclick
 
 
 likeBTN.addEventListener('click', () => {
-  count.textContent++;
+  integer += 1;
+  count.innerHTML = integer;
 });

@@ -1,22 +1,34 @@
-const postBtn = document.getElementById('post-btn');
-const createPostHandler = async function (event) {
+const postBtn = document.querySelector('#post-btn');
+console.log('starting')
+
+async function createPostHandler(event) {
   event.preventDefault();
+  console.log('posting')
 
-  const postMessage = document.querySelector('#textarea1').value;
-
-  const response = await fetch('/api/post/', {
+  const message = document.querySelector('#textarea1').value;
+  console.log(message)
+  await fetch(`/api/post/`, {
     method: 'POST',
     body: JSON.stringify({
-      message: postMessage,
+      message
     }),
     headers: { 'Content-Type': 'application/json' },
   });
 
-  if (response.ok) {
-    document.location.replace('/pond');
-  } else {
-    alert('Failed to login');
-  }
+
+  document.location.replace('/pond');
 };
 
-postBtn.addEventListener('submit', createPostHandler);
+document.querySelector('#post-btn').addEventListener('click', createPostHandler);
+
+// Like counter
+
+const likeBTN = document.querySelector('#likeBtn');
+const count = document.querySelector('#likeCount');
+
+// onclick
+
+
+likeBTN.addEventListener('click', () => {
+  count.textContent++;
+});

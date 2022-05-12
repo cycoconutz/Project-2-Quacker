@@ -1,11 +1,11 @@
 :root {
     --ltbrown: rgb(142, 105, 75);
     --ltforest: #86938F;
-    --medforest: #5E877F;
+    --medforest: #00897b;
     --forest: #14213D;
     --light: #E3E4E3;
     --dkbrown: rgb(15, 28, 17);
-    --blue: rgb(51, 50, 185);
+    --blue: rgb(55, 55, 134);
     --bill: rgb(215, 171, 40);
     --red: rgb(177, 74, 48)
 }
@@ -57,6 +57,25 @@ nav {
     font-weight: 700;
 }
 
+form {
+    border: 2px var(--bill) solid;
+    border-radius: 15px;
+    background-color: var(--blue);
+
+}
+
+form .input-field :focus {
+    border-radius: 15px;
+    background: var(--light);
+    transition: background-color 1.5s ease;
+
+}
+
+#post-btn {
+    color: var(--bill);
+    background-color: var(--medforest);
+}
+
 .loginBtn {
     background-color: var(--bill);
 }
@@ -67,4 +86,27 @@ nav {
 
 .logo {
     width: 60px;
+}
+
+/* for post page */
+.postContainer {
+    position: relative;
+    top: 100px;
+}
+
+.commentTable {
+    display: block;
+}
+
+.commentTable, 
+tr, td {
+    border: none;
+}
+/* end post page css */
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

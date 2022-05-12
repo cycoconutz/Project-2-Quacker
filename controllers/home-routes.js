@@ -15,12 +15,12 @@ router.get('/pond', withAuth, async (req, res) => {
     let loginStatus; 
 
     if (typeof req.session.passport != "undefined") {
-      loginStatus = req.session.passport.user;
+      loginStatus = req.session.passport.user_id;
       console.log("loginStatus", loginStatus);
     } else {
       loginStatus = false;
     }
-
+    console.log("session user_id:", req.session.passport)
     res.render('pond', {
       posts,
     });
@@ -36,6 +36,7 @@ router.get('/', (req, res) => {
     res.redirect('/pond');
     return;
   }
+  
   res.render('homepage');
 });
 
@@ -113,9 +114,9 @@ router.put('/:id', async (req, res) => {
     const updatePost = await Post.update(
       {
         message: req.body.message,
-        likes: req.body.likes,
-        post_id: req.body.post_id,
-        user_id: req.body.user_id
+        // likes: req.body.likes,
+        // post_id: req.body.post_id,
+        // user_id: req.body.user_id
       },
       {
       where: { 

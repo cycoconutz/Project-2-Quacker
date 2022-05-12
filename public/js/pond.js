@@ -12,6 +12,7 @@ async function createPostHandler(event) {
   await fetch(`/api/post/`, {
     method: 'POST',
     body: JSON.stringify({
+      username: req.session.username,
       message,
     }),
     headers: { 'Content-Type': 'application/json' },

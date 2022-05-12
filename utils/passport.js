@@ -17,7 +17,8 @@ passport.use(new LocalStrategy(
   async function(req, email, password, done) {
     let user = await User.findOne({
       where: {
-        username: username
+        username: username, 
+        user_id: user.id
       }
     });
 

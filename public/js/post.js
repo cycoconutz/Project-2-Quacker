@@ -19,7 +19,7 @@ async function createPostHandler(event) {
   document.location.replace('/pond');
 };
 
-document.querySelector('#post-btn').addEventListener('click', createPostHandler);
+document.querySelector('#post-btn').addEventListener('submit', createPostHandler);
 
 // Like counter
 

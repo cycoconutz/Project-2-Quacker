@@ -46,6 +46,23 @@ router.get('/pond', (req, res) => {
   res.render('pond');
 });
 
+// 
+router.get('/post/:id', async (req, res) => {
+  try {
+    const postData = await Post.findOne({
+      where: { id: req.params.id },
+      include: [{ all: true, nested: true }]
+    });
+    const post = postData.get({ plain: true });
+    res.render('post', {
+      post
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // GET all Posts for homepage
 // router.get("/", async (req, res) => {
 //   console.log("req.session", req.session);

@@ -68,3 +68,17 @@ nav {
 .logo {
     width: 60px;
 }
+
+.postContainer {
+    position: relative;
+    top: 100px;
+}
+
+.commentTable {
+    display: block;
+}
+
+.commentTable, 
+tr, td {
+    border: none;
+}

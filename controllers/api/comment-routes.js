@@ -42,9 +42,8 @@ router.post('/', async (req, res) => {
     const dbCommentData = await Comment.create({
       message: req.body.message,
       likes: req.body.likes,
-      // need to capture user ID 
-      // need to capture post ID
-      // something to do with sessions and passport?
+      post_id: req.body.post_id,
+      user_id: req.body.user_id
     });
 
       res.status(200).json(dbCommentData);
@@ -58,16 +57,16 @@ router.post('/', async (req, res) => {
 // delete comment
 router.delete("/:id", async (req, res) => {
   try {
-  const deletePost = await Post.destroy({
+  const deleteComment = await Comment.destroy({
       where: { id: req.params.id },
   })
   // If there is no comment with that ID...cannot be found
-  if (!dbCommentData) {
+  if (!deleteComment) {
     res.status(404).json({ message: "This comment cannot be found."});
     return
 }
 
-  res.json(deletePost);
+  res.json(deleteComment);
 
 } catch (err) {
   console.log(err);
@@ -75,20 +74,20 @@ router.delete("/:id", async (req, res) => {
 }
 });
 
-// Update Post
+// Update Comment
 router.put("/:id", async (req, res) => {
   try {
-  const updatePost = await Post.update({
-      where: { id: req.params.id,
-      },
-  })
-  // if there is no comment with that ID...
-  if (!dbCommentData) {
-    res.status(404).json({ message: "This comment cannot be found."});
-    return
-}
+  const updateComment = await Comment.update({
+    where: {
+      id: req.params.id,
+      message: req.params.message,
+      likes: req.params.likes,
+      post_id: req.params.post_id,
+      user_id: req.params.user_id
+     },
+  });
 
-  res.json(updatePost);
+  res.json(updateComment);
 
 } catch (err) {
   console.log(err);

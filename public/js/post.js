@@ -1,3 +1,5 @@
+const currentUrl = window.location.href;
+const postId = currentUrl.substring(currentUrl.lastIndexOf('/'));
 const postBtn = document.querySelector('#post-btn');
 const deleteBtn = document.querySelector('#deleteBtn');
 console.log('starting');
@@ -35,15 +37,13 @@ likeBTN.addEventListener('click', () => {
   count.textContent++;
 });
 
-const postId = currentUrl.substring(currentUrl.lastIndexOf('/'));
-
 // Create a Delete functionality
 async function deletePostHandler(event) {
   event.preventDefault();
   console.log('deleting');
 
-  console.log(message);
-  await fetch(`/api/post/`, {
+  // console.log(message);
+  await fetch(`/api/post/${postId}`, {
     method: 'DELETE',
     // body: JSON.stringify({
     //   post_id: postId,

@@ -8,13 +8,14 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
+const config = require('./config/config')
 const helpers = require('./utils/helpers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-  secret: 'Super secret secret secretly super secret',
+  secret: 'a man a plan a canal panama 12312300112',
   cookie: {},
   path: '/',
   resave: false,

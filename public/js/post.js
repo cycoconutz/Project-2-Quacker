@@ -1,7 +1,7 @@
-// const postBtn = document.getElementById('post-btn');
+const postBtn = document.querySelector('#post-btn');
 console.log('starting')
 
-const createPostHandler = async function (event) {
+async function createPostHandler(event) {
   event.preventDefault();
   console.log('posting')
 

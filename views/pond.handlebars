@@ -9,8 +9,8 @@
       </div>
 
       <div class='flexbox'>
-        <button class='waves-effect waves-light btn-large' id='post-btn'><i class='material-icons left'
-            onclick="play1()">comment</i>Post</button>
+        <a class='waves-effect waves-light btn-large' id='post-btn'><i class='material-icons left'
+            onclick="play1()">comment</i>Post</a>
       </div>
     </form>
   </div>
@@ -24,7 +24,7 @@
       <div class="col s12 ">
         <div class="card blue-grey darken-1">
           <div class="card-content white-text">
-            <span class="card-id#{{post.id}}">#{{post.id}}</span>
+            <span class="">#{{post.id}}</span>
             <span class="card-title">{{user.username}}</span>
             <p>{{post.message}}</p>
           </div>
@@ -33,7 +33,9 @@
               {{post.likes}} &nbsp
               <i class="fa-solid fa-egg"></i>Likes
             </a>
-            <a class="waves-effect waves-blue btn-flat" id="replyBtn">Reply</a>
+            <button class="btn waves-effect  red darken-3 waves-orange lighten-1 right" type="submit"
+              name="action">Delete <i class="material-icons">delete_forever</i>
+            </button>
           </div>
         </div>
       </div>
@@ -49,5 +51,4 @@
 <audio id="audio" src="/images/homequack.mp3"></audio>
 <script src='./js/play.js'></script>
 <script src="/js/logout.js"></script>
-<script src="/js/likes.js"></script>
 <script src="/js/post.js"></script>

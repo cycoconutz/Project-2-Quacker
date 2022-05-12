@@ -28,6 +28,7 @@ document
 
 const likeBTN = document.querySelector('#likeBtn');
 const count = document.querySelector('#likeCount');
+let integer = 0;
 
 // onclick
 

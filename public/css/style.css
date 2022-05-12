@@ -88,6 +88,22 @@ form .input-field :focus {
     width: 60px;
 }
 
+/* for post page */
+.postContainer {
+    position: relative;
+    top: 100px;
+}
+
+.commentTable {
+    display: block;
+}
+
+.commentTable, 
+tr, td {
+    border: none;
+}
+/* end post page css */
+
 .flexbox {
     display: flex;
     flex-wrap: wrap;

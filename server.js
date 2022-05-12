@@ -8,7 +8,7 @@ const LocalStrategy = require('passport-local').Strategy;
 
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
-const config = require('./config/config')
+// const config = require('./config/config')
 const helpers = require('./utils/helpers');
 
 const app = express();

@@ -66,10 +66,11 @@ router.post('/', withAuth, async (req, res) => {
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const deletePost = Post.destroy({
-      where: {
+        where: {
         id: req.params.id,
       },
-    });
+    }
+    );
     if (!deletePost) {
       res.status(404).json({ message: 'No post was found with that Id' });
       return;

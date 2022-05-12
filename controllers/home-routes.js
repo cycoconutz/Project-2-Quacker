@@ -82,6 +82,31 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+router.get('/post/:id/edit', async (req, res) => {
+  try {
+    const postData = await Post.findOne({
+      where: { id: req.params.id },
+      include: [{ all: true, nested: true }]
+    });
+    const post = postData.get({ plain: true });
+
+    let loginStatus;
+    if (typeof req.session.passport != 'undefined') {
+      loginStatus =  req.session.passport.user;
+    } else {
+        loginStatus = false;
+    }   
+    
+    res.render('edit', {
+      post
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+
 // Update Post
 router.put('/:id', async (req, res) => {
   try {

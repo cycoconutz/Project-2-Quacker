@@ -53,6 +53,11 @@ nav {
     pointer-events: all !important;
 }
 
+.quack {
+    background-color: var(--primary);
+    border: none;
+}
+
 .card-title {
     color: var(--bill);
     border-bottom: 2px solid white;

@@ -1,13 +1,19 @@
-var audio = document.getElementById("audio");
+var audio1 = document.getElementById("audio1");
+var audio2 = document.getElementById("audio2");
 var audio3 = document.getElementById("audio3");
+var quack1 = document.getElementById("quack1");
+var quack2 = document.getElementById("quack2");
+var quack3 = document.getElementById("quack3");
 
 function play1() {
-
-    audio.play();
+    audio1.play();
 }
-
+function play2() {
+    audio2.play();
+}
 function play3() {
     audio3.play();
 }
-audio.addEventListener('click', play1())
-audio3.addEventListener('click', play3())
+quack1.addEventListener('click', play1())
+quack2.addEventListener('click', play2())
+quack3.addEventListener('click', play3())

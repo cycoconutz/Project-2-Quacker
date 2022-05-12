@@ -74,25 +74,29 @@ router.delete("/:id", async (req, res) => {
 }
 });
 
-// Update Comment
+// update Comment
 router.put("/:id", async (req, res) => {
   try {
-  const updateComment = await Comment.update({
-    where: {
-      id: req.params.id,
-      message: req.params.message,
-      likes: req.params.likes,
-      post_id: req.params.post_id,
-      user_id: req.params.user_id
-     },
-  });
+  const updateComment = await Comment.update(
+      {
+          message: req.body.message,
+          likes: req.body.likes,
+          user_id: req.body.user_id
+      },
+      {
+          where: {
+              id: req.params.id,
+          },
+      }
+  );
+      return res.json(updateComment)
+    
+    } catch (err) {
+      if (err) throw err;
 
-  res.json(updateComment);
-
-} catch (err) {
-  console.log(err);
-  if (err) throw err;
-}
+    }
 });
+
+
 
 module.exports = router;

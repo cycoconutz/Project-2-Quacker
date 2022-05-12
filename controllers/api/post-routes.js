@@ -64,15 +64,21 @@ router.delete('/:id', async (req, res) => {
 // Update Post
 router.put('/:id', async (req, res) => {
   try {
-    const updatePost = await Post.update({
+    const updatePost = await Post.update(
+      {
+        message: req.body.message,
+        likes: req.body.likes,
+        post_id: req.body.post_id,
+        user_id: req.body.user_id
+      },
+      {
       where: { 
-        id: req.params.id,
-        message: req.params.id,
-        likes: req.params.likes,
-        user_id: req.params.id
+        id: req.params.id
        },
-    });
-    res.json(updatePost);
+      }
+    );
+    return res.json(updatePost);
+
   } catch (err) {
     console.log(err);
     if (err) throw err;

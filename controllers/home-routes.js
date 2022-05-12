@@ -63,6 +63,31 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+// Update Post
+router.put('/:id', async (req, res) => {
+  try {
+    const updatePost = await Post.update(
+      {
+        message: req.body.message,
+        likes: req.body.likes,
+        post_id: req.body.post_id,
+        user_id: req.body.user_id
+      },
+      {
+      where: { 
+        id: req.params.id
+       },
+      }
+    );
+    return res.json(updatePost);
+
+  } catch (err) {
+    console.log(err);
+    if (err) throw err;
+  }
+});
+
+
 // GET all Posts for homepage
 // router.get("/", async (req, res) => {
 //   console.log("req.session", req.session);

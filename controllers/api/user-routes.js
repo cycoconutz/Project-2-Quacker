@@ -76,10 +76,20 @@ router.delete('/:id', async (req, res) => {
 // Update User
 router.put('/:id', async (req, res) => {
   try {
-    const updateUser = await User.update(req.body, {
+    const updateUser = await User.update( 
+      {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        profileimage_id: req.body.profileimage_id
+      },
+      {
       individualHooks: true,
       where: { id: req.params.id },
-    });
+      }
+    );
     res.json(updateUser);
   } catch (err) {
     console.log(err);

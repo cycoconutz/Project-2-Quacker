@@ -6,23 +6,23 @@ const ProfileImage = require('./ProfileImage');
 
 User.hasMany(Post, {
   foreignKey: 'user_id',
-  // onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
 });
 
 // Post Belongs to user
 Post.belongsTo(User, {
   foreignKey: 'user_id',
-  // onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
 });
 
 User.hasMany(Comment, {
   foreignKey: 'user_id',
-  // onDelete: "CASCADE"
+  onDelete: 'CASCADE',
 });
 
 Comment.belongsTo(User, {
   foreignKey: 'user_id',
-  // onDelete: 'CASCADE'
+  onDelete: 'CASCADE',
 });
 
 ProfileImage.hasMany(User, {
@@ -31,17 +31,18 @@ ProfileImage.hasMany(User, {
 
 // Profile Images
 User.belongsTo(ProfileImage, {
-  foreignKey: "profileImage_id",
+  foreignKey: 'profileImage_id',
 });
 
 Comment.belongsTo(Post, {
   foreignKey: 'post_id',
+  onDelete: 'CASCADE',
 });
 
-Post.hasMany(Comment, {
-  foreignKey: 'post_id',
-  // onDelete: "CASCADE"
-});
+// Post.hasMany(Comment, {
+//   foreignKey: 'post_id',
+//   onDelete: 'CASCADE',
+// });
 
 // // user belongs to profileimage
 // User.belongsTo(ProfileImage);

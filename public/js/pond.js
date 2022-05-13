@@ -1,6 +1,5 @@
 const postBtn = document.querySelector('#post-btn');
 const deleteBtn = document.querySelector('#deleteBtn');
-console.log('starting');
 
 // Create a post functionality
 async function createPostHandler(event) {
@@ -33,9 +32,9 @@ let integer = 0;
 
 // onclick
 
-likeBTN.addEventListener('click', () => {
-  count.textContent++;
-});
+// likeBTN.addEventListener('click', () => {
+//   count.textContent++;
+// });
 
 
 

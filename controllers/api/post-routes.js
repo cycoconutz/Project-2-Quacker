@@ -106,24 +106,20 @@ router.put('/:id', async (req, res) => {
     const updatePost = await Post.update(
       {
         message: req.body.message,
-        likes: req.body.likes,
-        post_id: req.body.post_id,
-        user_id: req.body.user_id
+        user_id: req.session.user_id,
       },
       {
         where: {
-          id: req.params.id
+          id: req.params.id,
         },
       }
     );
-    return res.json(updatePost);
-
+    console.log(req.body);
+    return res.status(200).json(updatePost);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-
 
 // Update Likes
 // Found this example online
@@ -131,21 +127,20 @@ router.put('/:id', async (req, res) => {
 //   { seq: sequelize.literal('seq + 5') },
 //   { where: { id: model_id } }
 // );
-router.put('/', async (req, res) => {
-  try {
-    const updateLikes = await Post.update(
-      { seq: likes.literal('seq + 1') },
-      {
-        where: { id: Post.id }
-      });
-    res.json(updateLikes);
-  } catch (err) {
-    console.log(err);
-    if (err) throw err;
-  }
-});
-
-
+// router.put('/', async (req, res) => {
+//   try {
+//     const updateLikes = await Post.update(
+//       { seq: likes.literal('seq + 1') },
+//       {
+//         where: { id: Post.id },
+//       }
+//     );
+//     res.json(updateLikes);
+//   } catch (err) {
+//     console.log(err);
+//     if (err) throw err;
+//   }
+// });
 
 // // Do we need these?
 // // Login

@@ -1,0 +1,43 @@
+<!-- nav bar -->
+<div class='row center-align'>
+  <a href='/pond' class='brand-logo'><img
+      class='logo circle responsive-img valign'
+      src='/images/QuackerLogo.png'
+      alt='Quacker Logo'
+    /></a>
+</div>
+
+<!-- display post -->
+
+<div class='row flexbox' id=''>
+  <div class='col s12'>
+    <div class='card blue-grey darken-1'>
+      <div class='card-content white-text'>
+        <p class='card-title'>{{post.user.username}}</p>
+        <div class='postCardMessage'>
+          <textarea id='editedPost'></textarea>
+        </div>
+      </div>
+      <div class='card-action'>
+        <button
+          id='cancelBtn'
+          class='btn waves-effect red darken-3 waves-orange lighten-1 right'
+          type='submit'
+          name='action'
+        >Cancel
+          <i class='material-icons'>cancel</i>
+        </button>
+        <button
+          id='saveBtn'
+          class='btn waves-effect btn-flat waves-orange lighten-1 m 2right'
+          type='submit'
+          name='action'
+        >Save
+          <i class='material-icons'>save</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src='/js/edit.js'></script>

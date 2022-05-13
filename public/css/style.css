@@ -1,129 +1,132 @@
 :root {
-    --ltbrown: rgb(142, 105, 75);
-    --ltforest: #86938F;
-    --medforest: #00897b;
-    --forest: #14213D;
-    --light: #E3E4E3;
-    --dkbrown: rgb(15, 28, 17);
-    --blue: rgb(55, 55, 134);
-    --bill: rgb(215, 171, 40);
-    --red: rgb(177, 74, 48)
+  --ltbrown: rgb(142, 105, 75);
+  --ltforest: #86938f;
+  --medforest: #00897b;
+  --forest: #14213d;
+  --light: #e3e4e3;
+  --dkbrown: rgb(15, 28, 17);
+  --blue: rgb(55, 55, 134);
+  --bill: rgb(215, 171, 40);
+  --red: rgb(177, 74, 48);
+}
+
+[data-view='hidden'] {
+  display: none;
+}
+[data-view='visible'] {
+  display: inline;
 }
 
 body {
-    font-family: Arial;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    justify-content: flex-start;
-    background-color: var(--forest);
+  font-family: Arial;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start;
+  background-color: var(--forest);
 }
 
 a {
-    color: var(--dkbrown);
-    text-decoration: none;
+  color: var(--dkbrown);
+  text-decoration: none;
 }
 
 a:visited {
-    color: inherit;
+  color: inherit;
 }
 
 header {
-    padding: 40px;
-    text-align: center;
-    background: var(--forest);
-    color: var(--light);
+  padding: 40px;
+  text-align: center;
+  background: var(--forest);
+  color: var(--light);
 }
 
 h1 {
-    font-family: 'Cinzel Decorative', cursive;
-    font-size: 4.5rem;
-    font-weight: 400;
-    color: var(--bill);
-    text-align: center;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 4.5rem;
+  font-weight: 400;
+  color: var(--bill);
+  text-align: center;
 }
 
 nav {
-    background-color: var(--blue);
-
+  background-color: var(--blue);
 }
 
 .input-field label {
-    pointer-events: all !important;
+  pointer-events: all !important;
 }
 
 .quack {
-    background-color: var(--primary);
-    border: none;
+  background-color: var(--primary);
+  border: none;
 }
 
 .card-title {
-    color: var(--bill);
-    border-bottom: 2px solid white;
+  color: var(--bill);
+  border-bottom: 2px solid white;
 }
 
 #Q {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 form {
-    border: 2px var(--bill) solid;
-    border-radius: 15px;
-    background-color: var(--blue);
-
+  border: 2px var(--bill) solid;
+  border-radius: 15px;
+  background-color: var(--blue);
 }
 
 form .input-field :focus {
-    border-radius: 15px;
-    background: var(--light);
-    transition: background-color 1.5s ease;
-
+  border-radius: 15px;
+  background: var(--light);
+  transition: background-color 1.5s ease;
 }
 
 #post-btn {
-    color: var(--bill);
-    background-color: var(--medforest);
+  color: var(--bill);
+  background-color: var(--medforest);
 }
 
 .loginBtn {
-    background-color: var(--bill);
+  background-color: var(--bill);
 }
 
 .logoutBtn {
-    background-color: var(--red);
+  background-color: var(--red);
 }
 
 .logo {
-    width: 60px;
+  width: 60px;
 }
 
 /* for post page */
 .postContainer {
-    position: relative;
-    top: 100px;
+  position: relative;
+  top: 100px;
 }
 
 .commentTable {
-    display: block;
+  display: block;
 }
 
 .commentTable,
 tr,
 td {
-    border: none;
+  border: none;
 }
 
 .orangeText {
-    color: var(--bill);
-
+  color: var(--bill);
 }
 
 /* end post page css */
 
 .flexbox {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }

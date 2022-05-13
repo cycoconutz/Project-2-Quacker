@@ -15,5 +15,4 @@ function play3() {
     audio3.play();
 }
 quack1.addEventListener('click', play1())
-quack2.addEventListener('click', play2())
 quack3.addEventListener('click', play3())

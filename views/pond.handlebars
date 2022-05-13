@@ -29,9 +29,9 @@
             <p>{{post.message}}</p>
           </div>
           <div class="card-action">
-            <a class="waves-effect waves-blue btn-flat likeBtn">
-              {{post.likes}} &nbsp
-              <i class="fa-solid fa-egg"></i>Likes
+            <a class="likeBtn waves-effect waves-blue btn-flat">
+              <span class="likesCounter"></span>
+              <i class="fa-solid fa-egg"></i> Likes
             </a>
           </div>
         </div>
@@ -45,11 +45,12 @@
     </button>
   </div>
 </main>
+
 <audio id="audio1" src="/images/homequack.mp3"></audio>
 <audio id="audio2" src="/images/queack.mp3"></audio>
 <audio id="audio3" src="/images/cowboyquack.mp3"></audio>
 
-<script src='./js/play.js'></script>
-<script src="/js/logout.js"></script>
-<script src="/js/post.js"></script>
 <script src="/js/pond.js"></script>
+<script src="./js/likes.js"></script>
+<script src="/js/logout.js"></script>
+<script src='./js/play.js'></script>

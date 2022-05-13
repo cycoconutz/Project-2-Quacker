@@ -90,6 +90,10 @@ form .input-field :focus {
     background-color: var(--bill);
 }
 
+.likeBtn {
+    background: var(--red);
+}
+
 .logoutBtn {
     background-color: var(--red);
 }

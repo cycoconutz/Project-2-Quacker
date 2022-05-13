@@ -9,7 +9,7 @@
       </div>
 
       <div class='flexbox'>
-        <a class='waves-effect waves-light btn-large' id='post-btn'><i class='material-icons left'
+        <a class='waves-effect waves-light btn-large' id='post-btn'><i id="quack1" class='material-icons left'
             onclick="play1()">comment</i>Post</a>
       </div>
     </form>
@@ -29,9 +29,9 @@
             <p>{{post.message}}</p>
           </div>
           <div class="card-action">
-            <a class="waves-effect waves-blue btn-flat likeBtn">
-              {{post.likes}} &nbsp
-              <i class="fa-solid fa-egg"></i>Likes
+            <a class="likeBtn waves-effect waves-blue btn-flat">
+              <span class="likesCounter"></span>
+              <i class="fa-solid fa-egg"></i> Likes
             </a>
           </div>
         </div>
@@ -40,13 +40,17 @@
   </a>
   {{/each}}
   <div class="row flexbox">
-    <button id="logout-link" class=" logoutBtn  btn waves-effect waves-teal" type="submit" name="action">Logout
+    <button id="logout-link" class=" logoutBtn  btn waves-effect waves-teal" type="submit" name="action"><a id="quack3"
+        onclick="play3()">Logout</a>
     </button>
   </div>
 </main>
 
-<audio id="audio" src="/images/homequack.mp3"></audio>
-<script src='./js/play.js'></script>
-<script src="/js/logout.js"></script>
-<script src="/js/post.js"></script>
+<audio id="audio1" src="/images/homequack.mp3"></audio>
+<audio id="audio2" src="/images/queack.mp3"></audio>
+<audio id="audio3" src="/images/cowboyquack.mp3"></audio>
+
 <script src="/js/pond.js"></script>
+<script src="./js/likes.js"></script>
+<script src="/js/logout.js"></script>
+<script src='./js/play.js'></script>
